@@ -1,0 +1,3 @@
+/mnt/c/Users/Lilia/Downloads/findStyle/build/CMakeFiles/MonJeu.dir
+/mnt/c/Users/Lilia/Downloads/findStyle/build/CMakeFiles/edit_cache.dir
+/mnt/c/Users/Lilia/Downloads/findStyle/build/CMakeFiles/rebuild_cache.dir
