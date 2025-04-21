@@ -14,10 +14,8 @@ int main()
     if (!game)
         return (1);
     while (game->getGraphic()->isWindowOpen()) {
-        game->getGraphic()->animationSlideMenu();
-        game->getGraphic()->clearWindow();
-        game->getGraphic()->drawWindowMenu();
-        game->getGraphic()->displayWindow();
+        if (game->getStatus() ==  MENU)
+            game->getGraphic()->handleMenuAnimation();
     }
     delete(game);
     return (0);

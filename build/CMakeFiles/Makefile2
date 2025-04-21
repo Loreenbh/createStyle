@@ -81,12 +81,12 @@ clean: CMakeFiles/MonJeu.dir/clean
 CMakeFiles/MonJeu.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/MonJeu.dir/build.make CMakeFiles/MonJeu.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/MonJeu.dir/build.make CMakeFiles/MonJeu.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/mnt/c/Users/Lilia/Downloads/findStyle/build/CMakeFiles --progress-num=1,2,3,4 "Built target MonJeu"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/mnt/c/Users/Lilia/Downloads/findStyle/build/CMakeFiles --progress-num=1,2,3,4,5 "Built target MonJeu"
 .PHONY : CMakeFiles/MonJeu.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/MonJeu.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/Lilia/Downloads/findStyle/build/CMakeFiles 4
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/Lilia/Downloads/findStyle/build/CMakeFiles 5
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/MonJeu.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/Lilia/Downloads/findStyle/build/CMakeFiles 0
 .PHONY : CMakeFiles/MonJeu.dir/rule

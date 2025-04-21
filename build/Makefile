@@ -177,6 +177,30 @@ srcs/graphic.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/MonJeu.dir/build.make CMakeFiles/MonJeu.dir/srcs/graphic.cpp.s
 .PHONY : srcs/graphic.cpp.s
 
+srcs/graphicMenu.o: srcs/graphicMenu.cpp.o
+.PHONY : srcs/graphicMenu.o
+
+# target to build an object file
+srcs/graphicMenu.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MonJeu.dir/build.make CMakeFiles/MonJeu.dir/srcs/graphicMenu.cpp.o
+.PHONY : srcs/graphicMenu.cpp.o
+
+srcs/graphicMenu.i: srcs/graphicMenu.cpp.i
+.PHONY : srcs/graphicMenu.i
+
+# target to preprocess a source file
+srcs/graphicMenu.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MonJeu.dir/build.make CMakeFiles/MonJeu.dir/srcs/graphicMenu.cpp.i
+.PHONY : srcs/graphicMenu.cpp.i
+
+srcs/graphicMenu.s: srcs/graphicMenu.cpp.s
+.PHONY : srcs/graphicMenu.s
+
+# target to generate assembly for a file
+srcs/graphicMenu.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MonJeu.dir/build.make CMakeFiles/MonJeu.dir/srcs/graphicMenu.cpp.s
+.PHONY : srcs/graphicMenu.cpp.s
+
 srcs/main.o: srcs/main.cpp.o
 .PHONY : srcs/main.o
 
@@ -216,6 +240,9 @@ help:
 	@echo "... srcs/graphic.o"
 	@echo "... srcs/graphic.i"
 	@echo "... srcs/graphic.s"
+	@echo "... srcs/graphicMenu.o"
+	@echo "... srcs/graphicMenu.i"
+	@echo "... srcs/graphicMenu.s"
 	@echo "... srcs/main.o"
 	@echo "... srcs/main.i"
 	@echo "... srcs/main.s"

@@ -4,9 +4,9 @@
 Game::Game() : 
     _state(MENU), _graphics(nullptr){
     try{
-        _graphics = new Graphic(800, 600);
+        _graphics = new Graphic(100, 600);
         _graphics->createWindow();
-        _graphics->loadBackgroundMenu();
+        _graphics->initGraphicMenu();
     }
     catch(std::exception &e){
         throw;
@@ -22,7 +22,10 @@ Game::~Game(){
 
 
 //Getters
-//Getters
 Graphic *Game::getGraphic() const{
     return (this->_graphics);
+}
+
+GameState Game::getStatus() const{
+    return (this->_state);
 }

@@ -28,8 +28,10 @@ class Game {
         ~Game();  
     
         //Public Methods
+
         // //Getters
         Graphic *getGraphic() const;
+        GameState getStatus() const;
     };
 
 
