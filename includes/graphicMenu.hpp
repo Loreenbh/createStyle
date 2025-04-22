@@ -4,15 +4,16 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <vector>
-#include <cmath>
+// #include <cmath>
+// #include "graphic.hpp"
 
 class Graphic;
+#include "Button.hpp"
 
 //LANCER LE JEU SI SEULEMENT 2 SPRITES OU PLUS
 class GraphicMenu {
     private:
         Graphic                     *_graphic;
-
         //Texture
         int                         _currentSpriteIndex;
         sf::Sprite                  _currentSpriteMenu;
@@ -26,11 +27,8 @@ class GraphicMenu {
         float                       _currOpacity;
         sf::Clock                   _clock;
         sf::Sprite                  _nextSprite;
-        //Buttons Help
-        sf::RectangleShape          _buttonHelp;
-
-        //Button Play
-        sf::RectangleShape          _buttonPlay;
+        Button                      _buttonHelp;
+        Button                      _buttonPlay;
 
     public:
         //Constructor

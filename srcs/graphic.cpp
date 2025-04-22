@@ -6,6 +6,8 @@ _window(),
 _ratio(2.0f),
 _windowWidth(windowWidth),
 _windowHeight(windowHeight),
+_windowRefWidth(900),
+_windowRefHeight(600),
 _graphicMenu(nullptr)
 {
 }
@@ -121,4 +123,12 @@ void Graphic::handleMenuAnimation() {
 // ********************************* Getters
 sf::RenderWindow &Graphic::getWindow(){
     return (this->_window);
+}
+
+float &Graphic::getRefWinWidth(){
+    return (this->_windowRefWidth);
+}
+
+float &Graphic::getRefWinHeight(){
+    return (this->_windowRefHeight);
 }

@@ -10,13 +10,14 @@ _fadeDuration(2.f),
 _waitDuration(5.f),
 _currOpacity(0.f),
 _clock(),
-_nextSprite()
+_nextSprite(),
+_buttonHelp("Help", graphic, 0),
+_buttonPlay("Play", graphic, 1)
 {
     _pathBackgroundMenu.push_back("../backgroundIndex/background0.png");
     _pathBackgroundMenu.push_back("../backgroundIndex/background1.png");
     _pathBackgroundMenu.push_back("../backgroundIndex/background2.png");
     _pathBackgroundMenu.push_back("../backgroundIndex/background3.png");
-// std::cout << "Graphic construit avec " << _windowWidth << "x" << _windowHeight << std::endl;
 }
 
 GraphicMenu::~GraphicMenu(){
@@ -24,6 +25,7 @@ GraphicMenu::~GraphicMenu(){
 }
 
 // ********************************** Public Methods
+
 int GraphicMenu::loadBackgroundMenu(){
     if (this->_pathBackgroundMenu.size() == 0)
         throw std::runtime_error("Aucune texture n'existe!");    
@@ -39,11 +41,8 @@ int GraphicMenu::loadBackgroundMenu(){
     this->_nextSprite.setTexture(this->_textureMenu[(this->_currentSpriteIndex + 1) % this->_textureMenu.size()]);
     this->_nextSprite.setColor(sf::Color(255, 255, 255, 0)); // Elle commence avec une opacité à 0 (invisible)
     this->_graphic->adaptHeightToWin(this->_textureMenu[this->_currentSpriteIndex + 1], this->_nextSprite);
-
-    //Charger les boutons
-    this->_buttonHelp.setSize(sf::Vector2f(10, 20));
-    this->_buttonHelp.setFillColor(sf::Color::Blue);
-    this->_buttonHelp.setPosition(100, 200);
+    this->_buttonPlay.setButtonMenu();
+    this->_buttonHelp.setButtonMenu();
     std::cout << "Les images ont été chargées, le tab contient" << this->_pathBackgroundMenu.size() << std::endl;
     return (1);
 }
@@ -55,7 +54,10 @@ void GraphicMenu::drawWindowMenu() {
     } 
     else
         this->_graphic->getWindow().draw(this->_currentSpriteMenu);
+    this->_graphic->getWindow().draw(this->_buttonPlay);
+    this->_graphic->getWindow().draw(this->_buttonPlay.getText());
     this->_graphic->getWindow().draw(this->_buttonHelp);
+    this->_graphic->getWindow().draw(this->_buttonHelp.getText());
 }
 
 

@@ -4,7 +4,7 @@
 Game::Game() : 
     _state(MENU), _graphics(nullptr){
     try{
-        _graphics = new Graphic(100, 600);
+        _graphics = new Graphic(300, 100);
         _graphics->createWindow();
         _graphics->initGraphicMenu();
     }

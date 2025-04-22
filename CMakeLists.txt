@@ -18,6 +18,7 @@ add_executable(MonJeu
     srcs/game.cpp
     srcs/graphic.cpp
     srcs/graphicMenu.cpp
+    srcs/Button.cpp
     # Ajoute ici d'autres fichiers .cpp si nécessaire
 )
 

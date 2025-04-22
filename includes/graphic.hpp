@@ -4,20 +4,18 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <vector>
-#include <cmath>
+// #include <cmath>
 #include "graphicMenu.hpp"
-
-class GraphicMenu;
 
 //LANCER LE JEU SI SEULEMENT 2 SPRITES OU PLUS
 class Graphic {
     private:
-
-        //Handle window je laisse dans General
         sf::RenderWindow            _window;
         const float                 _ratio;
-        unsigned int                _windowWidth;
-        unsigned int                _windowHeight;
+        float                _windowWidth;
+        float                _windowHeight;
+        float                _windowRefWidth;
+        float                _windowRefHeight;
         GraphicMenu                 *_graphicMenu;
     
     public:
@@ -38,6 +36,8 @@ class Graphic {
 
         //Getters
         sf::RenderWindow &getWindow();
+        float &getRefWinWidth();
+        float &getRefWinHeight();
     };
 
 
