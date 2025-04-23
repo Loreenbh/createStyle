@@ -4,18 +4,19 @@
 Game::Game() : 
     _state(MENU), _graphics(nullptr){
     try{
-        _graphics = new Graphic(300, 100);
-        _graphics->createWindow();
-        _graphics->initGraphicMenu();
+        _graphics = new Graphic(100, 100); //rien a verifier
+        _graphics->createWindow(); //check fenetre closed
+        _graphics->initGraphicMenu(); //creation de scene Menu
     }
     catch(std::exception &e){
         throw;
     }
+    std::cout << "Game created" << std::endl;
 }
 
 Game::~Game(){
     delete _graphics;
-    std::cout << "L'objet Game a été détruit" << std::endl;
+    std::cout << "Game destroyed" << std::endl;
 }
 
 //Public Methods

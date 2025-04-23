@@ -4,8 +4,6 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <vector>
-// #include <cmath>
-// #include "graphic.hpp"
 
 class Graphic;
 #include "Button.hpp"
@@ -37,12 +35,14 @@ class GraphicMenu {
         ~GraphicMenu();  
     
         //Public Methods
-        int    loadBackgroundMenu();
+        void    loadBackgroundMenu();
         void   drawWindowMenu();
         void   animationSlideMenu();
         void   getReadyNext();
 
         //Getters
+        Button  &getButtonPlay(void);
+        Button  &getButtonHelp(void);
     };
 
 

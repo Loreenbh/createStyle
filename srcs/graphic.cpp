@@ -8,32 +8,36 @@ _windowWidth(windowWidth),
 _windowHeight(windowHeight),
 _windowRefWidth(900),
 _windowRefHeight(600),
+_windowRefMaxHeight(1080),
+_windowRefMaxWidth(1920),
 _graphicMenu(nullptr)
 {
 }
 
 Graphic::~Graphic(){
-    std::cout << "L'objet GraphicMenu a été détruit" << std::endl;
+    std::cout << "Graphic destroyed" << std::endl;
+    if (this->_graphicMenu)
+        delete this->_graphicMenu;
 }
 
-// ********************************** Public Methods
 
+
+// ********************************** Public Methods
 void Graphic::initGraphicMenu(){
     try{
         this->_graphicMenu = new GraphicMenu(this); 
         this->_graphicMenu->loadBackgroundMenu();
     }
     catch(std::exception &e){
-        std::cerr << "Erreur dans Graphic: " << e.what() << std::endl;
         throw;
     }
+    std::cout << "GraphicMenu created" << std::endl;
 }
 
 void Graphic::adjustWinSize() {
     unsigned int height = this->_windowHeight;
     unsigned int width = this->_windowWidth;
 
-    // On vérifie que la largeur et la hauteur respectent les contraintes minimales
     if (height < 300)
         height = 300;
     if (width < 500)
@@ -43,7 +47,6 @@ void Graphic::adjustWinSize() {
     float ratio = 1.5;  // Ici, tu peux mettre n'importe quel facteur (1.5, 2, etc.)
     unsigned int newWidth = static_cast<unsigned int>(height * ratio);
 
-    // Ajuster si la largeur est plus petite que la taille calculée
     if (width < newWidth) {
         this->_windowWidth = newWidth;
         this->_windowHeight = height;
@@ -51,20 +54,13 @@ void Graphic::adjustWinSize() {
         this->_windowHeight = static_cast<unsigned int>(width / ratio);
         this->_windowWidth = width;
     }
-
-    // Limiter la taille à la résolution de l'écran de l'utilisateur
-    sf::VideoMode desktopMode = sf::VideoMode::getDesktopMode();
-    unsigned int maxWidth = desktopMode.width;
-    unsigned int maxHeight = desktopMode.height;
-
-    // Ne pas dépasser la taille de l'écran
-    if (this->_windowWidth > maxWidth) {
-        this->_windowWidth = maxWidth;
-        this->_windowHeight = static_cast<unsigned int>(maxWidth / ratio);
+    if (this->_windowWidth > this->_windowRefMaxWidth) {
+        this->_windowWidth = this->_windowRefMaxWidth;
+        this->_windowHeight = static_cast<unsigned int>(this->_windowRefMaxWidth / ratio);
     }
-    if (this->_windowHeight > maxHeight) {
-        this->_windowHeight = maxHeight;
-        this->_windowWidth = static_cast<unsigned int>(maxHeight * ratio);
+    if (this->_windowHeight > this->_windowRefMaxHeight) {
+        this->_windowHeight = this->_windowRefMaxHeight;
+        this->_windowWidth = static_cast<unsigned int>(this->_windowRefMaxHeight * ratio);
     }
 }
 
@@ -81,10 +77,9 @@ void    Graphic::adaptHeightToWin(sf::Texture &texture, sf::Sprite &sprite){
     float windowHeight = this->_window.getSize().y;
     float windowWidth = this->_window.getSize().x;
 
-    // Récupérer la taille de la texture (texture.getSize() renvoie un sf::Vector2u)
     sf::Vector2u textureSize = texture.getSize();
-    float textureHeight = static_cast<float>(textureSize.y); // Conversion en float
-    float textureWidth = static_cast<float>(textureSize.x);  // Récupérer la largeur de l'image
+    float textureHeight = static_cast<float>(textureSize.y);
+    float textureWidth = static_cast<float>(textureSize.x);
 
     // Calculer le facteur de mise à l'échelle pour la hauteur
     float scaleY = windowHeight / textureHeight;
@@ -93,11 +88,10 @@ void    Graphic::adaptHeightToWin(sf::Texture &texture, sf::Sprite &sprite){
     sprite.setScale(sf::Vector2f(scaleY, scaleY));
 
     // Vérifier si l'image est plus large que la fenêtre
-    float scaledWidth = textureWidth * scaleY; // Calculer la largeur redimensionnée
+    float scaledWidth = textureWidth * scaleY;
     if (scaledWidth > windowWidth) {
-        // Si l'image est trop large, ajuster l'échelle pour qu'elle tienne dans la fenêtre
-        float scaleX = windowWidth / scaledWidth; // Calculer l'échelle en X
-        sprite.setScale(sf::Vector2f(scaleX, scaleY)); // Appliquer le redimensionnement en X
+        float scaleX = windowWidth / scaledWidth;
+        sprite.setScale(sf::Vector2f(scaleX, scaleY));
     }
 }
 
@@ -120,6 +114,24 @@ void Graphic::handleMenuAnimation() {
     this->displayWindow();
 }
 
+
+void Graphic::hoverButtonsMenu(){
+    sf::Vector2i mousePos = sf::Mouse::getPosition(this->getWindow());
+    if (this->getGraphicMenu()->getButtonPlay().getGlobalBounds().contains(mousePos.x, mousePos.y)){
+        this->getGraphicMenu()->getButtonPlay().setFillColor(sf::Color::Red);
+    }
+    else if (this->getGraphicMenu()->getButtonHelp().getGlobalBounds().contains(mousePos.x, mousePos.y))
+        this->getGraphicMenu()->getButtonHelp().setFillColor(sf::Color::Green);
+    else{
+        this->getGraphicMenu()->getButtonPlay().setFillColor(sf::Color::White);
+        this->getGraphicMenu()->getButtonHelp().setFillColor(sf::Color::White);
+    }
+}
+
+void Graphic::closeWindow(){
+    this->_window.close();
+}
+
 // ********************************* Getters
 sf::RenderWindow &Graphic::getWindow(){
     return (this->_window);
@@ -131,4 +143,8 @@ float &Graphic::getRefWinWidth(){
 
 float &Graphic::getRefWinHeight(){
     return (this->_windowRefHeight);
+}
+
+GraphicMenu  *Graphic::getGraphicMenu(){
+    return (this->_graphicMenu);
 }

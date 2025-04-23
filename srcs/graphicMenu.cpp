@@ -11,40 +11,41 @@ _waitDuration(5.f),
 _currOpacity(0.f),
 _clock(),
 _nextSprite(),
-_buttonHelp("Help", graphic, 0),
-_buttonPlay("Play", graphic, 1)
+_buttonHelp("help", graphic, 0),
+_buttonPlay("play", graphic, 1)
 {
     _pathBackgroundMenu.push_back("../backgroundIndex/background0.png");
     _pathBackgroundMenu.push_back("../backgroundIndex/background1.png");
     _pathBackgroundMenu.push_back("../backgroundIndex/background2.png");
     _pathBackgroundMenu.push_back("../backgroundIndex/background3.png");
+    std::cout << "GraphicMenu created" << std::endl;
 }
 
 GraphicMenu::~GraphicMenu(){
-    std::cout << "L'objet Graphic a été détruit" << std::endl;
+    std::cout << "GraphicMenu destroyed" << std::endl;
 }
 
-// ********************************** Public Methods
 
-int GraphicMenu::loadBackgroundMenu(){
+// ********************************** Public Methods
+void GraphicMenu::loadBackgroundMenu(){
     if (this->_pathBackgroundMenu.size() == 0)
-        throw std::runtime_error("Aucune texture n'existe!");    
+        throw std::runtime_error("The menu doesn't contain any textures");    
+    if (this->_pathBackgroundMenu.size() < 2)
+        throw std::runtime_error("The menu must contain at least two textures");    
     for (int i = 0; i < this->_pathBackgroundMenu.size(); ++i){
         sf::Texture texture;
         if (!texture.loadFromFile(this->_pathBackgroundMenu[i]))
-            throw std::runtime_error("Texture n'est pas chargée");
+            throw std::runtime_error("The texture has not been loaded");
         this->_textureMenu.push_back(std::move(texture)); 
     }
     this->_currentSpriteMenu.setTexture(this->_textureMenu[this->_currentSpriteIndex]);
     this->_graphic->adaptHeightToWin(this->_textureMenu[this->_currentSpriteIndex], this->_currentSpriteMenu);
 
     this->_nextSprite.setTexture(this->_textureMenu[(this->_currentSpriteIndex + 1) % this->_textureMenu.size()]);
-    this->_nextSprite.setColor(sf::Color(255, 255, 255, 0)); // Elle commence avec une opacité à 0 (invisible)
+    this->_nextSprite.setColor(sf::Color(255, 255, 255, 0));
     this->_graphic->adaptHeightToWin(this->_textureMenu[this->_currentSpriteIndex + 1], this->_nextSprite);
     this->_buttonPlay.setButtonMenu();
     this->_buttonHelp.setButtonMenu();
-    std::cout << "Les images ont été chargées, le tab contient" << this->_pathBackgroundMenu.size() << std::endl;
-    return (1);
 }
 
 void GraphicMenu::drawWindowMenu() {
@@ -68,7 +69,6 @@ void GraphicMenu::getReadyNext() {
     this->_graphic->adaptHeightToWin(this->_textureMenu[next], this->_nextSprite);
 }
 
-//seulement si j'ai 2 images ou plus
 void GraphicMenu::animationSlideMenu() {
     if (!this->_fade) {
         this->getReadyNext();
@@ -95,6 +95,7 @@ void GraphicMenu::animationSlideMenu() {
             if (this->_clock.getElapsedTime().asSeconds() > this->_waitDuration) {
                 this->_currentSpriteIndex = (this->_currentSpriteIndex + 1) % this->_textureMenu.size();
                 this->_currentSpriteMenu.setTexture(this->_textureMenu[this->_currentSpriteIndex]);
+                this->_graphic->adaptHeightToWin(this->_textureMenu[this->_currentSpriteIndex], this->_currentSpriteMenu);
                 this->_currentSpriteMenu.setColor(sf::Color(255, 255, 255, 255));
                 this->_fade = false;
                 this->_clock.restart();
@@ -103,3 +104,11 @@ void GraphicMenu::animationSlideMenu() {
     }
 }
 
+// ********************************** GETTERS
+Button &GraphicMenu::getButtonHelp(void){
+    return (this->_buttonHelp);
+}
+
+Button &GraphicMenu::getButtonPlay(void){
+    return (this->_buttonPlay);
+}

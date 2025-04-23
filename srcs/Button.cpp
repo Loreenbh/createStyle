@@ -13,9 +13,12 @@ _helpRefY(78),
 _playRefX(240),
 _playRefY(308)
 {
+    std::cout << "Button created" << std::endl;
 }
 
 Button::~Button(){
+    std::cout << "Button destroyed" << std::endl;
+
 }
 
 // ********************************** Public Methods
@@ -43,12 +46,14 @@ void    Button::setButtonMenu(){
     this->setPosition(buttonPosX, buttonPosY);
     this->setSize(sf::Vector2f(buttonWidth, buttonHeight));
     this->setFillColor(sf::Color::White);
-    if (!this->_font.loadFromFile("../fonts/AMORIA.otf"))
-    throw std::runtime_error("Erreur : impossible de charger la police AMORIA.otf");
+    if (!this->_font.loadFromFile("../fonts/Napzer.otf"))
+        throw std::runtime_error("Erreur : impossible de charger la police Napzer.otf");
     this->_text.setFont(this->_font);
+    this->_text.setCharacterSize(20);
+    this->_text.setScale(scaleX, scaleY);
     this->_text.setString(this->_str);
     this->_text.setFillColor(sf::Color::Black);
-    this->_text.setPosition(buttonPosX, buttonPosY);
+    this->_text.setPosition(buttonPosX + 7, buttonPosY - 3);
 }
 
 // ********************************* Getters

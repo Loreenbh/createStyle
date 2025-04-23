@@ -34,6 +34,6 @@ target_link_libraries(MonJeu PRIVATE
     ${SFML_LIB_DIR}/libsfml-graphics-s.a
     ${SFML_LIB_DIR}/libsfml-window-s.a
     ${SFML_LIB_DIR}/libsfml-system-s.a
-    -lX11 -lXrandr -lXcursor -lGL -lopenal -lfreetype -ljpeg -lpthread 
-    -lFLAC -lvorbis -lvorbisenc -lvorbisfile -ludev -lXi
+    -lX11 -lXrandr -lXcursor -lGL -lfreetype -ljpeg -lpthread 
+    -ludev -lXi
 )
