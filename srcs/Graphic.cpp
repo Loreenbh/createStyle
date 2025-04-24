@@ -1,6 +1,6 @@
-#include "graphic.hpp"
+#include "Graphic.hpp"
 
-// ********************************* Constructor
+//*****************************************************************CONSTRUCTOR
 Graphic::Graphic(int windowWidth, int windowHeight) :
 _window(),
 _ratio(2.0f),
@@ -10,7 +10,8 @@ _windowRefWidth(900),
 _windowRefHeight(600),
 _windowRefMaxHeight(1080),
 _windowRefMaxWidth(1920),
-_graphicMenu(nullptr)
+_graphicMenu(nullptr),
+_graphicHelp(nullptr)
 {
 }
 
@@ -18,20 +19,32 @@ Graphic::~Graphic(){
     std::cout << "Graphic destroyed" << std::endl;
     if (this->_graphicMenu)
         delete this->_graphicMenu;
+    if (this->_graphicHelp)
+        delete this->_graphicHelp;
 }
 
 
-
-// ********************************** Public Methods
+//*****************************************************************PUBLIC METHODS
 void Graphic::initGraphicMenu(){
     try{
         this->_graphicMenu = new GraphicMenu(this); 
-        this->_graphicMenu->loadBackgroundMenu();
+        this->_graphicMenu->loadSceneMenu();
     }
     catch(std::exception &e){
         throw;
     }
     std::cout << "GraphicMenu created" << std::endl;
+}
+
+void Graphic::initGraphicHelp(){
+    try{
+        this->_graphicHelp = new GraphicHelp(this); 
+        this->_graphicHelp->loadSceneHelp();
+    }
+    catch(std::exception &e){
+        throw;
+    }
+    std::cout << "GraphicHelp created" << std::endl;
 }
 
 void Graphic::adjustWinSize() {
@@ -114,25 +127,16 @@ void Graphic::handleMenuAnimation() {
     this->displayWindow();
 }
 
-
-void Graphic::hoverButtonsMenu(){
-    sf::Vector2i mousePos = sf::Mouse::getPosition(this->getWindow());
-    if (this->getGraphicMenu()->getButtonPlay().getGlobalBounds().contains(mousePos.x, mousePos.y)){
-        this->getGraphicMenu()->getButtonPlay().setFillColor(sf::Color::Red);
-    }
-    else if (this->getGraphicMenu()->getButtonHelp().getGlobalBounds().contains(mousePos.x, mousePos.y))
-        this->getGraphicMenu()->getButtonHelp().setFillColor(sf::Color::Green);
-    else{
-        this->getGraphicMenu()->getButtonPlay().setFillColor(sf::Color::White);
-        this->getGraphicMenu()->getButtonHelp().setFillColor(sf::Color::White);
-    }
+void Graphic::handleHelpAnimation(sf::Event &event){
+    this->clearWindow();
+    if (event.mouseWheelScroll.wheel == sf::Mouse::VerticalWheel)
+        this->getGraphicHelp()->getView().move(0, event.mouseWheelScroll.delta * 26.f);
+    this->getWindow().setView(this->getGraphicHelp()->getView());
+    this->_window.draw(this->getGraphicHelp()->getSprite());
+    this->displayWindow();
 }
 
-void Graphic::closeWindow(){
-    this->_window.close();
-}
-
-// ********************************* Getters
+//*****************************************************************GETTERS
 sf::RenderWindow &Graphic::getWindow(){
     return (this->_window);
 }
@@ -145,6 +149,18 @@ float &Graphic::getRefWinHeight(){
     return (this->_windowRefHeight);
 }
 
+float &Graphic::getWidthWin() {
+    return (this->_windowWidth);
+}
+
+float &Graphic::getHeigthWin() {
+    return (this->_windowHeight);
+}
+
 GraphicMenu  *Graphic::getGraphicMenu(){
     return (this->_graphicMenu);
+}
+
+GraphicHelp  *Graphic::getGraphicHelp(){
+    return (this->_graphicHelp);
 }

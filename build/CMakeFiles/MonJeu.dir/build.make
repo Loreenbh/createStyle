@@ -83,52 +83,66 @@ CMakeFiles/MonJeu.dir/srcs/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/MonJeu.dir/srcs/main.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/lbegliom/style/srcs/main.cpp -o CMakeFiles/MonJeu.dir/srcs/main.cpp.s
 
-CMakeFiles/MonJeu.dir/srcs/game.cpp.o: CMakeFiles/MonJeu.dir/flags.make
-CMakeFiles/MonJeu.dir/srcs/game.cpp.o: ../srcs/game.cpp
-CMakeFiles/MonJeu.dir/srcs/game.cpp.o: CMakeFiles/MonJeu.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lbegliom/style/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/MonJeu.dir/srcs/game.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/MonJeu.dir/srcs/game.cpp.o -MF CMakeFiles/MonJeu.dir/srcs/game.cpp.o.d -o CMakeFiles/MonJeu.dir/srcs/game.cpp.o -c /home/lbegliom/style/srcs/game.cpp
+CMakeFiles/MonJeu.dir/srcs/Game.cpp.o: CMakeFiles/MonJeu.dir/flags.make
+CMakeFiles/MonJeu.dir/srcs/Game.cpp.o: ../srcs/Game.cpp
+CMakeFiles/MonJeu.dir/srcs/Game.cpp.o: CMakeFiles/MonJeu.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lbegliom/style/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/MonJeu.dir/srcs/Game.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/MonJeu.dir/srcs/Game.cpp.o -MF CMakeFiles/MonJeu.dir/srcs/Game.cpp.o.d -o CMakeFiles/MonJeu.dir/srcs/Game.cpp.o -c /home/lbegliom/style/srcs/Game.cpp
 
-CMakeFiles/MonJeu.dir/srcs/game.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/MonJeu.dir/srcs/game.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/lbegliom/style/srcs/game.cpp > CMakeFiles/MonJeu.dir/srcs/game.cpp.i
+CMakeFiles/MonJeu.dir/srcs/Game.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/MonJeu.dir/srcs/Game.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/lbegliom/style/srcs/Game.cpp > CMakeFiles/MonJeu.dir/srcs/Game.cpp.i
 
-CMakeFiles/MonJeu.dir/srcs/game.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/MonJeu.dir/srcs/game.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/lbegliom/style/srcs/game.cpp -o CMakeFiles/MonJeu.dir/srcs/game.cpp.s
+CMakeFiles/MonJeu.dir/srcs/Game.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/MonJeu.dir/srcs/Game.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/lbegliom/style/srcs/Game.cpp -o CMakeFiles/MonJeu.dir/srcs/Game.cpp.s
 
-CMakeFiles/MonJeu.dir/srcs/graphic.cpp.o: CMakeFiles/MonJeu.dir/flags.make
-CMakeFiles/MonJeu.dir/srcs/graphic.cpp.o: ../srcs/graphic.cpp
-CMakeFiles/MonJeu.dir/srcs/graphic.cpp.o: CMakeFiles/MonJeu.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lbegliom/style/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/MonJeu.dir/srcs/graphic.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/MonJeu.dir/srcs/graphic.cpp.o -MF CMakeFiles/MonJeu.dir/srcs/graphic.cpp.o.d -o CMakeFiles/MonJeu.dir/srcs/graphic.cpp.o -c /home/lbegliom/style/srcs/graphic.cpp
+CMakeFiles/MonJeu.dir/srcs/Graphic.cpp.o: CMakeFiles/MonJeu.dir/flags.make
+CMakeFiles/MonJeu.dir/srcs/Graphic.cpp.o: ../srcs/Graphic.cpp
+CMakeFiles/MonJeu.dir/srcs/Graphic.cpp.o: CMakeFiles/MonJeu.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lbegliom/style/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/MonJeu.dir/srcs/Graphic.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/MonJeu.dir/srcs/Graphic.cpp.o -MF CMakeFiles/MonJeu.dir/srcs/Graphic.cpp.o.d -o CMakeFiles/MonJeu.dir/srcs/Graphic.cpp.o -c /home/lbegliom/style/srcs/Graphic.cpp
 
-CMakeFiles/MonJeu.dir/srcs/graphic.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/MonJeu.dir/srcs/graphic.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/lbegliom/style/srcs/graphic.cpp > CMakeFiles/MonJeu.dir/srcs/graphic.cpp.i
+CMakeFiles/MonJeu.dir/srcs/Graphic.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/MonJeu.dir/srcs/Graphic.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/lbegliom/style/srcs/Graphic.cpp > CMakeFiles/MonJeu.dir/srcs/Graphic.cpp.i
 
-CMakeFiles/MonJeu.dir/srcs/graphic.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/MonJeu.dir/srcs/graphic.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/lbegliom/style/srcs/graphic.cpp -o CMakeFiles/MonJeu.dir/srcs/graphic.cpp.s
+CMakeFiles/MonJeu.dir/srcs/Graphic.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/MonJeu.dir/srcs/Graphic.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/lbegliom/style/srcs/Graphic.cpp -o CMakeFiles/MonJeu.dir/srcs/Graphic.cpp.s
 
-CMakeFiles/MonJeu.dir/srcs/graphicMenu.cpp.o: CMakeFiles/MonJeu.dir/flags.make
-CMakeFiles/MonJeu.dir/srcs/graphicMenu.cpp.o: ../srcs/graphicMenu.cpp
-CMakeFiles/MonJeu.dir/srcs/graphicMenu.cpp.o: CMakeFiles/MonJeu.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lbegliom/style/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/MonJeu.dir/srcs/graphicMenu.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/MonJeu.dir/srcs/graphicMenu.cpp.o -MF CMakeFiles/MonJeu.dir/srcs/graphicMenu.cpp.o.d -o CMakeFiles/MonJeu.dir/srcs/graphicMenu.cpp.o -c /home/lbegliom/style/srcs/graphicMenu.cpp
+CMakeFiles/MonJeu.dir/srcs/GraphicMenu.cpp.o: CMakeFiles/MonJeu.dir/flags.make
+CMakeFiles/MonJeu.dir/srcs/GraphicMenu.cpp.o: ../srcs/GraphicMenu.cpp
+CMakeFiles/MonJeu.dir/srcs/GraphicMenu.cpp.o: CMakeFiles/MonJeu.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lbegliom/style/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/MonJeu.dir/srcs/GraphicMenu.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/MonJeu.dir/srcs/GraphicMenu.cpp.o -MF CMakeFiles/MonJeu.dir/srcs/GraphicMenu.cpp.o.d -o CMakeFiles/MonJeu.dir/srcs/GraphicMenu.cpp.o -c /home/lbegliom/style/srcs/GraphicMenu.cpp
 
-CMakeFiles/MonJeu.dir/srcs/graphicMenu.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/MonJeu.dir/srcs/graphicMenu.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/lbegliom/style/srcs/graphicMenu.cpp > CMakeFiles/MonJeu.dir/srcs/graphicMenu.cpp.i
+CMakeFiles/MonJeu.dir/srcs/GraphicMenu.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/MonJeu.dir/srcs/GraphicMenu.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/lbegliom/style/srcs/GraphicMenu.cpp > CMakeFiles/MonJeu.dir/srcs/GraphicMenu.cpp.i
 
-CMakeFiles/MonJeu.dir/srcs/graphicMenu.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/MonJeu.dir/srcs/graphicMenu.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/lbegliom/style/srcs/graphicMenu.cpp -o CMakeFiles/MonJeu.dir/srcs/graphicMenu.cpp.s
+CMakeFiles/MonJeu.dir/srcs/GraphicMenu.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/MonJeu.dir/srcs/GraphicMenu.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/lbegliom/style/srcs/GraphicMenu.cpp -o CMakeFiles/MonJeu.dir/srcs/GraphicMenu.cpp.s
+
+CMakeFiles/MonJeu.dir/srcs/GraphicHelp.cpp.o: CMakeFiles/MonJeu.dir/flags.make
+CMakeFiles/MonJeu.dir/srcs/GraphicHelp.cpp.o: ../srcs/GraphicHelp.cpp
+CMakeFiles/MonJeu.dir/srcs/GraphicHelp.cpp.o: CMakeFiles/MonJeu.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lbegliom/style/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/MonJeu.dir/srcs/GraphicHelp.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/MonJeu.dir/srcs/GraphicHelp.cpp.o -MF CMakeFiles/MonJeu.dir/srcs/GraphicHelp.cpp.o.d -o CMakeFiles/MonJeu.dir/srcs/GraphicHelp.cpp.o -c /home/lbegliom/style/srcs/GraphicHelp.cpp
+
+CMakeFiles/MonJeu.dir/srcs/GraphicHelp.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/MonJeu.dir/srcs/GraphicHelp.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/lbegliom/style/srcs/GraphicHelp.cpp > CMakeFiles/MonJeu.dir/srcs/GraphicHelp.cpp.i
+
+CMakeFiles/MonJeu.dir/srcs/GraphicHelp.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/MonJeu.dir/srcs/GraphicHelp.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/lbegliom/style/srcs/GraphicHelp.cpp -o CMakeFiles/MonJeu.dir/srcs/GraphicHelp.cpp.s
 
 CMakeFiles/MonJeu.dir/srcs/Button.cpp.o: CMakeFiles/MonJeu.dir/flags.make
 CMakeFiles/MonJeu.dir/srcs/Button.cpp.o: ../srcs/Button.cpp
 CMakeFiles/MonJeu.dir/srcs/Button.cpp.o: CMakeFiles/MonJeu.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lbegliom/style/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/MonJeu.dir/srcs/Button.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lbegliom/style/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/MonJeu.dir/srcs/Button.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/MonJeu.dir/srcs/Button.cpp.o -MF CMakeFiles/MonJeu.dir/srcs/Button.cpp.o.d -o CMakeFiles/MonJeu.dir/srcs/Button.cpp.o -c /home/lbegliom/style/srcs/Button.cpp
 
 CMakeFiles/MonJeu.dir/srcs/Button.cpp.i: cmake_force
@@ -142,25 +156,27 @@ CMakeFiles/MonJeu.dir/srcs/Button.cpp.s: cmake_force
 # Object files for target MonJeu
 MonJeu_OBJECTS = \
 "CMakeFiles/MonJeu.dir/srcs/main.cpp.o" \
-"CMakeFiles/MonJeu.dir/srcs/game.cpp.o" \
-"CMakeFiles/MonJeu.dir/srcs/graphic.cpp.o" \
-"CMakeFiles/MonJeu.dir/srcs/graphicMenu.cpp.o" \
+"CMakeFiles/MonJeu.dir/srcs/Game.cpp.o" \
+"CMakeFiles/MonJeu.dir/srcs/Graphic.cpp.o" \
+"CMakeFiles/MonJeu.dir/srcs/GraphicMenu.cpp.o" \
+"CMakeFiles/MonJeu.dir/srcs/GraphicHelp.cpp.o" \
 "CMakeFiles/MonJeu.dir/srcs/Button.cpp.o"
 
 # External object files for target MonJeu
 MonJeu_EXTERNAL_OBJECTS =
 
 MonJeu: CMakeFiles/MonJeu.dir/srcs/main.cpp.o
-MonJeu: CMakeFiles/MonJeu.dir/srcs/game.cpp.o
-MonJeu: CMakeFiles/MonJeu.dir/srcs/graphic.cpp.o
-MonJeu: CMakeFiles/MonJeu.dir/srcs/graphicMenu.cpp.o
+MonJeu: CMakeFiles/MonJeu.dir/srcs/Game.cpp.o
+MonJeu: CMakeFiles/MonJeu.dir/srcs/Graphic.cpp.o
+MonJeu: CMakeFiles/MonJeu.dir/srcs/GraphicMenu.cpp.o
+MonJeu: CMakeFiles/MonJeu.dir/srcs/GraphicHelp.cpp.o
 MonJeu: CMakeFiles/MonJeu.dir/srcs/Button.cpp.o
 MonJeu: CMakeFiles/MonJeu.dir/build.make
 MonJeu: ../SFML/build/lib/libsfml-graphics-s.a
 MonJeu: ../SFML/build/lib/libsfml-window-s.a
 MonJeu: ../SFML/build/lib/libsfml-system-s.a
 MonJeu: CMakeFiles/MonJeu.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/lbegliom/style/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable MonJeu"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/lbegliom/style/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable MonJeu"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/MonJeu.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

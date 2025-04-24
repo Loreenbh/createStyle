@@ -1,11 +1,10 @@
 #include "Button.hpp"
-#include "graphic.hpp"
+#include "Graphic.hpp"
 
-// ********************************* Constructor
+//*****************************************************************CONSTRUCTOR
 Button::Button(std::string txt, Graphic *graphic, int n):
 _graphic(graphic),
 _id(n),
-_str(txt),
 _buttonRefWidth(116),
 _buttonRefHeight(22),
 _helpRefX(127),
@@ -13,6 +12,7 @@ _helpRefY(78),
 _playRefX(240),
 _playRefY(308)
 {
+    _atrButton._str = txt;
     std::cout << "Button created" << std::endl;
 }
 
@@ -21,7 +21,7 @@ Button::~Button(){
 
 }
 
-// ********************************** Public Methods
+//*****************************************************************PUBLIC METHODS
 void    Button::setButtonMenu(){
     sf::Vector2u windowSize = this->_graphic->getWindow().getSize();
     float scaleX = static_cast<float>(windowSize.x) / this->_graphic->getRefWinWidth();
@@ -46,17 +46,17 @@ void    Button::setButtonMenu(){
     this->setPosition(buttonPosX, buttonPosY);
     this->setSize(sf::Vector2f(buttonWidth, buttonHeight));
     this->setFillColor(sf::Color::White);
-    if (!this->_font.loadFromFile("../fonts/Napzer.otf"))
+    if (!this->_atrButton._font.loadFromFile("../fonts/Napzer.otf"))
         throw std::runtime_error("Erreur : impossible de charger la police Napzer.otf");
-    this->_text.setFont(this->_font);
-    this->_text.setCharacterSize(20);
-    this->_text.setScale(scaleX, scaleY);
-    this->_text.setString(this->_str);
-    this->_text.setFillColor(sf::Color::Black);
-    this->_text.setPosition(buttonPosX + 7, buttonPosY - 3);
+    this->_atrButton._text.setFont(this->_atrButton._font);
+    this->_atrButton._text.setCharacterSize(20);
+    this->_atrButton._text.setScale(scaleX, scaleY);
+    this->_atrButton._text.setString(this->_atrButton._str);
+    this->_atrButton._text.setFillColor(sf::Color::Black);
+    this->_atrButton._text.setPosition(buttonPosX + 7, buttonPosY - 3);
 }
 
-// ********************************* Getters
+//*****************************************************************GETTERS
 sf::Text &Button::getText(){
-    return (this->_text);
+    return (this->_atrButton._text);
 }

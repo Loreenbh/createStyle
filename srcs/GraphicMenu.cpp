@@ -1,10 +1,11 @@
-#include "graphic.hpp"
+#include "Graphic.hpp"
 
-// ********************************* Constructor
+//*****************************************************************CONSTRUCTOR
 GraphicMenu::GraphicMenu(Graphic *graphic) : 
 _graphic(graphic),
 _currentSpriteIndex(0),
 _currentSpriteMenu(),
+_stopAnimation(false),
 _fade(false),
 _fadeDuration(2.f),
 _waitDuration(5.f),
@@ -14,10 +15,10 @@ _nextSprite(),
 _buttonHelp("help", graphic, 0),
 _buttonPlay("play", graphic, 1)
 {
-    _pathBackgroundMenu.push_back("../backgroundIndex/background0.png");
-    _pathBackgroundMenu.push_back("../backgroundIndex/background1.png");
-    _pathBackgroundMenu.push_back("../backgroundIndex/background2.png");
-    _pathBackgroundMenu.push_back("../backgroundIndex/background3.png");
+    _pathSceneMenu.push_back("../scenes/sceneMenu/scene0.png");
+    _pathSceneMenu.push_back("../scenes/sceneMenu/scene1.png");
+    _pathSceneMenu.push_back("../scenes/sceneMenu/scene2.png");
+    _pathSceneMenu.push_back("../scenes/sceneMenu/scene3.png");
     std::cout << "GraphicMenu created" << std::endl;
 }
 
@@ -26,16 +27,16 @@ GraphicMenu::~GraphicMenu(){
 }
 
 
-// ********************************** Public Methods
-void GraphicMenu::loadBackgroundMenu(){
-    if (this->_pathBackgroundMenu.size() == 0)
+//*****************************************************************PUBLIC METHODS
+void GraphicMenu::loadSceneMenu(){
+    if (this->_pathSceneMenu.size() == 0)
         throw std::runtime_error("The menu doesn't contain any textures");    
-    if (this->_pathBackgroundMenu.size() < 2)
+    if (this->_pathSceneMenu.size() < 2)
         throw std::runtime_error("The menu must contain at least two textures");    
-    for (int i = 0; i < this->_pathBackgroundMenu.size(); ++i){
+    for (int i = 0; i < this->_pathSceneMenu.size(); ++i){
         sf::Texture texture;
-        if (!texture.loadFromFile(this->_pathBackgroundMenu[i]))
-            throw std::runtime_error("The texture has not been loaded");
+        if (!texture.loadFromFile(this->_pathSceneMenu[i]))
+            throw std::runtime_error("GraphicMenu: The texture has not been loaded");
         this->_textureMenu.push_back(std::move(texture)); 
     }
     this->_currentSpriteMenu.setTexture(this->_textureMenu[this->_currentSpriteIndex]);
@@ -104,7 +105,11 @@ void GraphicMenu::animationSlideMenu() {
     }
 }
 
-// ********************************** GETTERS
+bool GraphicMenu::isAnimated(void) const{
+    return (this->_stopAnimation);
+}
+
+//*****************************************************************GETTERS
 Button &GraphicMenu::getButtonHelp(void){
     return (this->_buttonHelp);
 }

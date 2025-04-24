@@ -2,19 +2,22 @@
 #define BUTTON_HPP
 
 #include <SFML/Graphics.hpp>
-// #include "graphic.hpp"
 
 class Graphic;
+
+struct AttributeButton{
+    sf::Text     _text;
+    sf::Font      _font;
+    std::string  _str;
+};
 
 class Button: public sf::RectangleShape {
     private:
         Graphic     *_graphic;
         int         _id;
-        sf::Text     _text;
-        sf::Font      _font;
-        std::string  _str;
-        float   _buttonRefWidth; //116
-        float   _buttonRefHeight; //22
+        AttributeButton _atrButton;
+        float   _buttonRefWidth;
+        float   _buttonRefHeight;
         float   _helpRefX;
         float   _helpRefY;
         float   _playRefX;

@@ -15,10 +15,11 @@ class GraphicMenu {
         //Texture
         int                         _currentSpriteIndex;
         sf::Sprite                  _currentSpriteMenu;
-        std::vector<std::string>    _pathBackgroundMenu;
+        std::vector<std::string>    _pathSceneMenu;
         std::vector<sf::Texture>    _textureMenu;
+        bool                        _stopAnimation;
         
-        //Animation
+        //Animation Menu
         bool                        _fade;
         float                       _fadeDuration;
         float                       _waitDuration;
@@ -35,10 +36,11 @@ class GraphicMenu {
         ~GraphicMenu();  
     
         //Public Methods
-        void    loadBackgroundMenu();
+        void    loadSceneMenu();
         void   drawWindowMenu();
         void   animationSlideMenu();
         void   getReadyNext();
+        bool   isAnimated(void) const;
 
         //Getters
         Button  &getButtonPlay(void);

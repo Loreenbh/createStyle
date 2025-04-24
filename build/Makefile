@@ -153,77 +153,101 @@ srcs/Button.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/MonJeu.dir/build.make CMakeFiles/MonJeu.dir/srcs/Button.cpp.s
 .PHONY : srcs/Button.cpp.s
 
-srcs/game.o: srcs/game.cpp.o
-.PHONY : srcs/game.o
+srcs/Game.o: srcs/Game.cpp.o
+.PHONY : srcs/Game.o
 
 # target to build an object file
-srcs/game.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MonJeu.dir/build.make CMakeFiles/MonJeu.dir/srcs/game.cpp.o
-.PHONY : srcs/game.cpp.o
+srcs/Game.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MonJeu.dir/build.make CMakeFiles/MonJeu.dir/srcs/Game.cpp.o
+.PHONY : srcs/Game.cpp.o
 
-srcs/game.i: srcs/game.cpp.i
-.PHONY : srcs/game.i
+srcs/Game.i: srcs/Game.cpp.i
+.PHONY : srcs/Game.i
 
 # target to preprocess a source file
-srcs/game.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MonJeu.dir/build.make CMakeFiles/MonJeu.dir/srcs/game.cpp.i
-.PHONY : srcs/game.cpp.i
+srcs/Game.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MonJeu.dir/build.make CMakeFiles/MonJeu.dir/srcs/Game.cpp.i
+.PHONY : srcs/Game.cpp.i
 
-srcs/game.s: srcs/game.cpp.s
-.PHONY : srcs/game.s
+srcs/Game.s: srcs/Game.cpp.s
+.PHONY : srcs/Game.s
 
 # target to generate assembly for a file
-srcs/game.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MonJeu.dir/build.make CMakeFiles/MonJeu.dir/srcs/game.cpp.s
-.PHONY : srcs/game.cpp.s
+srcs/Game.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MonJeu.dir/build.make CMakeFiles/MonJeu.dir/srcs/Game.cpp.s
+.PHONY : srcs/Game.cpp.s
 
-srcs/graphic.o: srcs/graphic.cpp.o
-.PHONY : srcs/graphic.o
+srcs/Graphic.o: srcs/Graphic.cpp.o
+.PHONY : srcs/Graphic.o
 
 # target to build an object file
-srcs/graphic.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MonJeu.dir/build.make CMakeFiles/MonJeu.dir/srcs/graphic.cpp.o
-.PHONY : srcs/graphic.cpp.o
+srcs/Graphic.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MonJeu.dir/build.make CMakeFiles/MonJeu.dir/srcs/Graphic.cpp.o
+.PHONY : srcs/Graphic.cpp.o
 
-srcs/graphic.i: srcs/graphic.cpp.i
-.PHONY : srcs/graphic.i
+srcs/Graphic.i: srcs/Graphic.cpp.i
+.PHONY : srcs/Graphic.i
 
 # target to preprocess a source file
-srcs/graphic.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MonJeu.dir/build.make CMakeFiles/MonJeu.dir/srcs/graphic.cpp.i
-.PHONY : srcs/graphic.cpp.i
+srcs/Graphic.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MonJeu.dir/build.make CMakeFiles/MonJeu.dir/srcs/Graphic.cpp.i
+.PHONY : srcs/Graphic.cpp.i
 
-srcs/graphic.s: srcs/graphic.cpp.s
-.PHONY : srcs/graphic.s
+srcs/Graphic.s: srcs/Graphic.cpp.s
+.PHONY : srcs/Graphic.s
 
 # target to generate assembly for a file
-srcs/graphic.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MonJeu.dir/build.make CMakeFiles/MonJeu.dir/srcs/graphic.cpp.s
-.PHONY : srcs/graphic.cpp.s
+srcs/Graphic.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MonJeu.dir/build.make CMakeFiles/MonJeu.dir/srcs/Graphic.cpp.s
+.PHONY : srcs/Graphic.cpp.s
 
-srcs/graphicMenu.o: srcs/graphicMenu.cpp.o
-.PHONY : srcs/graphicMenu.o
+srcs/GraphicHelp.o: srcs/GraphicHelp.cpp.o
+.PHONY : srcs/GraphicHelp.o
 
 # target to build an object file
-srcs/graphicMenu.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MonJeu.dir/build.make CMakeFiles/MonJeu.dir/srcs/graphicMenu.cpp.o
-.PHONY : srcs/graphicMenu.cpp.o
+srcs/GraphicHelp.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MonJeu.dir/build.make CMakeFiles/MonJeu.dir/srcs/GraphicHelp.cpp.o
+.PHONY : srcs/GraphicHelp.cpp.o
 
-srcs/graphicMenu.i: srcs/graphicMenu.cpp.i
-.PHONY : srcs/graphicMenu.i
+srcs/GraphicHelp.i: srcs/GraphicHelp.cpp.i
+.PHONY : srcs/GraphicHelp.i
 
 # target to preprocess a source file
-srcs/graphicMenu.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MonJeu.dir/build.make CMakeFiles/MonJeu.dir/srcs/graphicMenu.cpp.i
-.PHONY : srcs/graphicMenu.cpp.i
+srcs/GraphicHelp.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MonJeu.dir/build.make CMakeFiles/MonJeu.dir/srcs/GraphicHelp.cpp.i
+.PHONY : srcs/GraphicHelp.cpp.i
 
-srcs/graphicMenu.s: srcs/graphicMenu.cpp.s
-.PHONY : srcs/graphicMenu.s
+srcs/GraphicHelp.s: srcs/GraphicHelp.cpp.s
+.PHONY : srcs/GraphicHelp.s
 
 # target to generate assembly for a file
-srcs/graphicMenu.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MonJeu.dir/build.make CMakeFiles/MonJeu.dir/srcs/graphicMenu.cpp.s
-.PHONY : srcs/graphicMenu.cpp.s
+srcs/GraphicHelp.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MonJeu.dir/build.make CMakeFiles/MonJeu.dir/srcs/GraphicHelp.cpp.s
+.PHONY : srcs/GraphicHelp.cpp.s
+
+srcs/GraphicMenu.o: srcs/GraphicMenu.cpp.o
+.PHONY : srcs/GraphicMenu.o
+
+# target to build an object file
+srcs/GraphicMenu.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MonJeu.dir/build.make CMakeFiles/MonJeu.dir/srcs/GraphicMenu.cpp.o
+.PHONY : srcs/GraphicMenu.cpp.o
+
+srcs/GraphicMenu.i: srcs/GraphicMenu.cpp.i
+.PHONY : srcs/GraphicMenu.i
+
+# target to preprocess a source file
+srcs/GraphicMenu.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MonJeu.dir/build.make CMakeFiles/MonJeu.dir/srcs/GraphicMenu.cpp.i
+.PHONY : srcs/GraphicMenu.cpp.i
+
+srcs/GraphicMenu.s: srcs/GraphicMenu.cpp.s
+.PHONY : srcs/GraphicMenu.s
+
+# target to generate assembly for a file
+srcs/GraphicMenu.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MonJeu.dir/build.make CMakeFiles/MonJeu.dir/srcs/GraphicMenu.cpp.s
+.PHONY : srcs/GraphicMenu.cpp.s
 
 srcs/main.o: srcs/main.cpp.o
 .PHONY : srcs/main.o
@@ -261,15 +285,18 @@ help:
 	@echo "... srcs/Button.o"
 	@echo "... srcs/Button.i"
 	@echo "... srcs/Button.s"
-	@echo "... srcs/game.o"
-	@echo "... srcs/game.i"
-	@echo "... srcs/game.s"
-	@echo "... srcs/graphic.o"
-	@echo "... srcs/graphic.i"
-	@echo "... srcs/graphic.s"
-	@echo "... srcs/graphicMenu.o"
-	@echo "... srcs/graphicMenu.i"
-	@echo "... srcs/graphicMenu.s"
+	@echo "... srcs/Game.o"
+	@echo "... srcs/Game.i"
+	@echo "... srcs/Game.s"
+	@echo "... srcs/Graphic.o"
+	@echo "... srcs/Graphic.i"
+	@echo "... srcs/Graphic.s"
+	@echo "... srcs/GraphicHelp.o"
+	@echo "... srcs/GraphicHelp.i"
+	@echo "... srcs/GraphicHelp.s"
+	@echo "... srcs/GraphicMenu.o"
+	@echo "... srcs/GraphicMenu.i"
+	@echo "... srcs/GraphicMenu.s"
 	@echo "... srcs/main.o"
 	@echo "... srcs/main.i"
 	@echo "... srcs/main.s"

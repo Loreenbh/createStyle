@@ -15,9 +15,10 @@ endif()
 # Ajout des fichiers sources de ton jeu
 add_executable(MonJeu
     srcs/main.cpp
-    srcs/game.cpp
-    srcs/graphic.cpp
-    srcs/graphicMenu.cpp
+    srcs/Game.cpp
+    srcs/Graphic.cpp
+    srcs/GraphicMenu.cpp
+    srcs/GraphicHelp.cpp
     srcs/Button.cpp
     # Ajoute ici d'autres fichiers .cpp si nécessaire
 )

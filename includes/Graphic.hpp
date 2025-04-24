@@ -3,8 +3,8 @@
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include <vector>
-#include "graphicMenu.hpp"
+#include "GraphicMenu.hpp"
+#include "GraphicHelp.hpp"
 
 //LANCER LE JEU SI SEULEMENT 2 SPRITES OU PLUS
 class Graphic {
@@ -18,6 +18,7 @@ class Graphic {
         float                _windowRefMaxWidth;
         float                _windowRefMaxHeight;
         GraphicMenu                 *_graphicMenu;
+        GraphicHelp                 *_graphicHelp;
     
     public:
         //Constructor
@@ -32,17 +33,22 @@ class Graphic {
         bool   isWindowOpen();
         void   clearWindow();
         void   displayWindow();
+        //Methods GraphicMenu
         void   initGraphicMenu();
         void   handleMenuAnimation();
-        //Events
-        void    closeWindow();
-        void    hoverButtonsMenu();
+        
+        //Methods GraphicHelp
+        void   initGraphicHelp();
+        void   handleHelpAnimation(sf::Event &event);
 
         //Getters
         sf::RenderWindow &getWindow();
         float &getRefWinWidth();
         float &getRefWinHeight();
+        float &getWidthWin();
+        float &getHeigthWin();
         GraphicMenu  *getGraphicMenu(void);
+        GraphicHelp  *getGraphicHelp(void);
 
     };
 
