@@ -1,3 +1,3 @@
-/home/lbegliom/style/build/CMakeFiles/MonJeu.dir
-/home/lbegliom/style/build/CMakeFiles/edit_cache.dir
-/home/lbegliom/style/build/CMakeFiles/rebuild_cache.dir
+/mnt/c/Users/Lilia/Downloads/stylish/build/CMakeFiles/MonJeu.dir
+/mnt/c/Users/Lilia/Downloads/stylish/build/CMakeFiles/edit_cache.dir
+/mnt/c/Users/Lilia/Downloads/stylish/build/CMakeFiles/rebuild_cache.dir
