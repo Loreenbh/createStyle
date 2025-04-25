@@ -122,16 +122,25 @@ void    Graphic::displayWindow(){
 
 void Graphic::handleMenuAnimation() {
     this->clearWindow();
-    this->_graphicMenu->animationSlideMenu();
-    this->_graphicMenu->drawWindowMenu();
+    if (!this->getGraphicMenu()->getAnimation()){
+        this->_graphicMenu->animationSlideMenu();
+        this->_graphicMenu->drawWindowMenu();
+    }
+    else{
+        this->_graphicMenu->getCurrentSprite().setTexture(
+            this->getGraphicMenu()->getCurrentTexture());
+        this->getGraphicMenu()->getCurrentSprite().setColor(sf::Color(255, 255, 255, 255));
+    }
+    this->getWindow().draw(this->getGraphicMenu()->getCurrentSprite());
+    this->getWindow().draw(this->getGraphicMenu()->getButtonPlay());
+    this->getWindow().draw(this->getGraphicMenu()->getButtonPlay().getText());
+    this->getWindow().draw(this->getGraphicMenu()->getButtonHelp());
+    this->getWindow().draw(this->getGraphicMenu()->getButtonHelp().getText());
     this->displayWindow();
 }
 
-void Graphic::handleHelpAnimation(sf::Event &event){
+void Graphic::handleHelpAnimation(){
     this->clearWindow();
-    if (event.mouseWheelScroll.wheel == sf::Mouse::VerticalWheel)
-        this->getGraphicHelp()->getView().move(0, event.mouseWheelScroll.delta * 26.f);
-    this->getWindow().setView(this->getGraphicHelp()->getView());
     this->_window.draw(this->getGraphicHelp()->getSprite());
     this->displayWindow();
 }

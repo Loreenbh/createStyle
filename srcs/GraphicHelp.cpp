@@ -4,7 +4,8 @@
 GraphicHelp::GraphicHelp(Graphic *graphic) : 
 _buttonReturn("Back", graphic, 3),
 _graphic(graphic),
-_view(sf::FloatRect(0, 0, this->_graphic->getWidthWin(), this->_graphic->getHeigthWin()))
+_view(sf::FloatRect(0, 0, this->_graphic->getWidthWin(), this->_graphic->getHeigthWin())),
+_scroll(false)
 {
     std::cout << "GraphicHelp created" << std::endl;
 }
@@ -16,24 +17,18 @@ GraphicHelp::~GraphicHelp(){
 
 //*****************************************************************PUBLIC METHODS
 void GraphicHelp::loadSceneHelp(){
-    sf::Texture texture;
-    if (!texture.loadFromFile("../scenes/sceneHelp/test.png"))
+    if (!this->_texture.loadFromFile("../scenes/sceneHelp/test.png"))
             throw std::runtime_error("GraphicHelp: The texture has not been loaded");
-    this->_sprite.setTexture(texture);
-    // this->_view(sf::FloatRect(0, 0, this->_graphic->getWidthWin(), this->_graphic->getHeigthWin()));
-    // this->_graphic->adaptHeightToWin(texture, this->_sprite);
-    // this->_buttonPlay.setButtonMenu();
-    // this->_buttonHelp.setButtonMenu();
-
-    //verifier l existance de l image
-    //charger la texture
-    //set la texture
+    this->_sprite.setTexture(this->_texture);
 }
 
 
 void GraphicHelp::drawWindowHelp() {
+    this->_graphic->getWindow().clear();
+    // if (!this->_scroll)
     this->_graphic->getWindow().draw(this->_sprite);
     this->_graphic->displayWindow();
+    // this->setScroll(false);
 }
 
 
@@ -44,4 +39,10 @@ sf::View &GraphicHelp::getView(){
 
 sf::Sprite &GraphicHelp::getSprite(){
     return (this->_sprite);
+}
+
+//*****************************************************************SETTERS
+bool &GraphicHelp::setScroll(bool value){
+    this->_scroll = value;
+    return (this->_scroll);
 }

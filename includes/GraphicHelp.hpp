@@ -10,8 +10,10 @@ class GraphicHelp {
     private:
         Button      _buttonReturn;
         Graphic     *_graphic;
+        sf::Texture _texture;
         sf::Sprite  _sprite;
         sf::View    _view;
+        bool        _scroll;
     public:
         //Constructor
         GraphicHelp(Graphic *graphic);
@@ -21,11 +23,14 @@ class GraphicHelp {
     
         //Public Methods
         void    loadSceneHelp(void);
-        void    drawWindowHelp(void); //scroller la fenetre
+        void    drawWindowHelp(void);
 
         //Getters
         sf::View &getView();
         sf::Sprite &getSprite();
+
+        //Setters
+        bool &setScroll(bool value);
 
     };
 

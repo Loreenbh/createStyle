@@ -14,7 +14,7 @@ class GraphicMenu {
         Graphic                     *_graphic;
         //Texture
         int                         _currentSpriteIndex;
-        sf::Sprite                  _currentSpriteMenu;
+        sf::Sprite                  _currentSprite;
         std::vector<std::string>    _pathSceneMenu;
         std::vector<sf::Texture>    _textureMenu;
         bool                        _stopAnimation;
@@ -40,11 +40,19 @@ class GraphicMenu {
         void   drawWindowMenu();
         void   animationSlideMenu();
         void   getReadyNext();
-        bool   isAnimated(void) const;
-
+        
         //Getters
-        Button  &getButtonPlay(void);
-        Button  &getButtonHelp(void);
+        Button        &getButtonPlay(void);
+        Button        &getButtonHelp(void);
+        bool          getAnimation(void) const;
+        sf::Sprite    &getCurrentSprite(void);
+        int           &getCurrentIndex(void);
+        sf::Texture   &getCurrentTexture(void);
+
+
+        //Setters
+        bool    &setAnimation(bool value);
+
     };
 
 

@@ -28,10 +28,13 @@ class Game {
         ~Game();  
     
         //Public Methods
+            //Menu
         void    checkButtonMenuPressed();
         void    closeWindow();
         bool    hoverButtonsMenu();
-        
+        void    selectEventMenu(void);
+            //Help
+        void    selectEventHelp(void);
         //Getters
         Graphic *getGraphic() const;
         GameState getStatus() const;

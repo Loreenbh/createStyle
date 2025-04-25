@@ -4,7 +4,7 @@
 GraphicMenu::GraphicMenu(Graphic *graphic) : 
 _graphic(graphic),
 _currentSpriteIndex(0),
-_currentSpriteMenu(),
+_currentSprite(),
 _stopAnimation(false),
 _fade(false),
 _fadeDuration(2.f),
@@ -39,8 +39,8 @@ void GraphicMenu::loadSceneMenu(){
             throw std::runtime_error("GraphicMenu: The texture has not been loaded");
         this->_textureMenu.push_back(std::move(texture)); 
     }
-    this->_currentSpriteMenu.setTexture(this->_textureMenu[this->_currentSpriteIndex]);
-    this->_graphic->adaptHeightToWin(this->_textureMenu[this->_currentSpriteIndex], this->_currentSpriteMenu);
+    this->_currentSprite.setTexture(this->_textureMenu[this->_currentSpriteIndex]);
+    this->_graphic->adaptHeightToWin(this->_textureMenu[this->_currentSpriteIndex], this->_currentSprite);
 
     this->_nextSprite.setTexture(this->_textureMenu[(this->_currentSpriteIndex + 1) % this->_textureMenu.size()]);
     this->_nextSprite.setColor(sf::Color(255, 255, 255, 0));
@@ -52,14 +52,10 @@ void GraphicMenu::loadSceneMenu(){
 void GraphicMenu::drawWindowMenu() {
     if (this->_fade) {
         this->_graphic->getWindow().draw(this->_nextSprite);
-        this->_graphic->getWindow().draw(this->_currentSpriteMenu);
+        this->_graphic->getWindow().draw(this->_currentSprite);
     } 
     else
-        this->_graphic->getWindow().draw(this->_currentSpriteMenu);
-    this->_graphic->getWindow().draw(this->_buttonPlay);
-    this->_graphic->getWindow().draw(this->_buttonPlay.getText());
-    this->_graphic->getWindow().draw(this->_buttonHelp);
-    this->_graphic->getWindow().draw(this->_buttonHelp.getText());
+        this->_graphic->getWindow().draw(this->_currentSprite);
 }
 
 
@@ -77,27 +73,26 @@ void GraphicMenu::animationSlideMenu() {
         this->_clock.restart();
     }
     if (this->_fade) {
-        // Calculer l'opacité en fonction du temps écoulé
         float fadeProgress = this->_clock.getElapsedTime().asSeconds() / _fadeDuration;
         if (fadeProgress <= 1.0f)
             this->_currOpacity = fadeProgress * 255;
         else
-            this->_currOpacity = 255;  // Une fois le fondu terminé, opacité = 255
+            this->_currOpacity = 255;
 
         sf::Color nextColor = this->_nextSprite.getColor();
         nextColor.a = static_cast<sf::Uint8>(this->_currOpacity);
         this->_nextSprite.setColor(nextColor);
 
-        sf::Color currentColor = this->_currentSpriteMenu.getColor();
+        sf::Color currentColor = this->_currentSprite.getColor();
         currentColor.a = static_cast<sf::Uint8>(255 - this->_currOpacity);
-        this->_currentSpriteMenu.setColor(currentColor);
+        this->_currentSprite.setColor(currentColor);
 
         if (this->_currOpacity >= 255) {
             if (this->_clock.getElapsedTime().asSeconds() > this->_waitDuration) {
                 this->_currentSpriteIndex = (this->_currentSpriteIndex + 1) % this->_textureMenu.size();
-                this->_currentSpriteMenu.setTexture(this->_textureMenu[this->_currentSpriteIndex]);
-                this->_graphic->adaptHeightToWin(this->_textureMenu[this->_currentSpriteIndex], this->_currentSpriteMenu);
-                this->_currentSpriteMenu.setColor(sf::Color(255, 255, 255, 255));
+                this->_currentSprite.setTexture(this->_textureMenu[this->_currentSpriteIndex]);
+                this->_graphic->adaptHeightToWin(this->_textureMenu[this->_currentSpriteIndex], this->_currentSprite);
+                this->_currentSprite.setColor(sf::Color(255, 255, 255, 255));
                 this->_fade = false;
                 this->_clock.restart();
             }
@@ -105,7 +100,7 @@ void GraphicMenu::animationSlideMenu() {
     }
 }
 
-bool GraphicMenu::isAnimated(void) const{
+bool GraphicMenu::getAnimation(void) const{
     return (this->_stopAnimation);
 }
 
@@ -116,4 +111,21 @@ Button &GraphicMenu::getButtonHelp(void){
 
 Button &GraphicMenu::getButtonPlay(void){
     return (this->_buttonPlay);
+}
+
+sf::Sprite &GraphicMenu::getCurrentSprite(void){
+    return (this->_currentSprite);
+}
+
+int &GraphicMenu::getCurrentIndex(void){
+    return (this->_currentSpriteIndex);
+}
+
+sf::Texture &GraphicMenu::getCurrentTexture(void){
+    return (this->_textureMenu[this->_currentSpriteIndex]);
+}
+//*****************************************************************SETTERS
+bool &GraphicMenu::setAnimation(bool value){
+    this->_stopAnimation = value;
+    return (this->_stopAnimation);
 }

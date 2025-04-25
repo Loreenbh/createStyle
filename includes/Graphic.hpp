@@ -39,7 +39,7 @@ class Graphic {
         
         //Methods GraphicHelp
         void   initGraphicHelp();
-        void   handleHelpAnimation(sf::Event &event);
+        void   handleHelpAnimation(void);
 
         //Getters
         sf::RenderWindow &getWindow();

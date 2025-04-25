@@ -16,31 +16,19 @@ int main()
     while (game->getGraphic()->isWindowOpen()) {
         game->getEvent();
         while (game->getGraphic()->getWindow().pollEvent(game->getEvent())){
-            if (game->getStatus() == MENU){
+            if (game->getStatus() == MENU)
                 game->selectEventMenu();
-                // game->hoverButtonsMenu();
-                // if (game->getEvent().type == sf::Event::MouseButtonPressed)
-                //     game->checkButtonMenuPressed(); //ici je change le set le type
-            }
-            if (game->getStatus() == HELP){
-                if (game->getEvent().type == sf::Event::MouseButtonPressed){
-                    game->getGraphic()->getGraphicHelp()->drawWindowHelp();
-                }
-                else if (game->getEvent().type == sf::Event::MouseWheelScrolled){
-                    game->getGraphic()->handleHelpAnimation(game->getEvent());
-                }
-            }
+            else if (game->getStatus() == HELP)
+                game->selectEventHelp(); 
             if (game->getEvent().type == sf::Event::Closed)
                 game->closeWindow();
         }
-        if (game->getStatus() ==  MENU &&  !game->getGraphic()->getGraphicMenu()->isAnimated())
+        if (game->getStatus() ==  MENU)
             game->getGraphic()->handleMenuAnimation();
+        else if (game->getStatus() == HELP){
+            game->getGraphic()->getGraphicHelp()->drawWindowHelp();
+        }
     }
     delete(game);
     return (0);
 }
-
-
-//Dans le menu:
-//Animation en boucle : fondu + affichage des boutons --> seulement si false
-//Quand je survole un bouton, je met true quand je quitte je remet false;

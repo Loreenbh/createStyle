@@ -1,7 +1,8 @@
 src/SFML/System/CMakeFiles/sfml-system.dir/Sleep.cpp.o: \
-  /home/lbegliom/style/SFML/src/SFML/System/Sleep.cpp \
-  /home/lbegliom/style/SFML/include/SFML/System/Sleep.hpp \
-  /home/lbegliom/style/SFML/include/SFML/System/Export.hpp \
-  /home/lbegliom/style/SFML/include/SFML/Config.hpp \
-  /home/lbegliom/style/SFML/include/SFML/System/Time.hpp \
-  /home/lbegliom/style/SFML/src/SFML/System/Unix/SleepImpl.hpp
+ /mnt/c/Users/Lilia/Downloads/stylish/SFML/src/SFML/System/Sleep.cpp \
+ /usr/include/stdc-predef.h \
+ /mnt/c/Users/Lilia/Downloads/stylish/SFML/include/SFML/System/Sleep.hpp \
+ /mnt/c/Users/Lilia/Downloads/stylish/SFML/include/SFML/System/Export.hpp \
+ /mnt/c/Users/Lilia/Downloads/stylish/SFML/include/SFML/Config.hpp \
+ /mnt/c/Users/Lilia/Downloads/stylish/SFML/include/SFML/System/Time.hpp \
+ /mnt/c/Users/Lilia/Downloads/stylish/SFML/src/SFML/System/Unix/SleepImpl.hpp
