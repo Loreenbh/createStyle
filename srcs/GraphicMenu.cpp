@@ -1,6 +1,6 @@
 #include "Graphic.hpp"
 
-//*****************************************************************CONSTRUCTOR
+//*********************************CONSTRUCTOR*********************************
 GraphicMenu::GraphicMenu(Graphic *graphic) : 
 _graphic(graphic),
 _currentSpriteIndex(0),
@@ -27,8 +27,8 @@ GraphicMenu::~GraphicMenu(){
 }
 
 
-//*****************************************************************PUBLIC METHODS
-void GraphicMenu::loadSceneMenu(){
+//*********************************PUBLIC METHODS*********************************
+void GraphicMenu::loadSceneMenu(void){
     if (this->_pathSceneMenu.size() == 0)
         throw std::runtime_error("The menu doesn't contain any textures");    
     if (this->_pathSceneMenu.size() < 2)
@@ -49,7 +49,7 @@ void GraphicMenu::loadSceneMenu(){
     this->_buttonHelp.setButtonMenu();
 }
 
-void GraphicMenu::drawWindowMenu() {
+void GraphicMenu::drawWindowMenu(void) {
     if (this->_fade) {
         this->_graphic->getWindow().draw(this->_nextSprite);
         this->_graphic->getWindow().draw(this->_currentSprite);
@@ -59,14 +59,14 @@ void GraphicMenu::drawWindowMenu() {
 }
 
 
-void GraphicMenu::getReadyNext() {
+void GraphicMenu::getReadyNext(void) {
     int next = (this->_currentSpriteIndex + 1) % this->_textureMenu.size();
     this->_nextSprite.setTexture(this->_textureMenu[next]);
     this->_nextSprite.setColor(sf::Color(255, 255, 255, 0));
     this->_graphic->adaptHeightToWin(this->_textureMenu[next], this->_nextSprite);
 }
 
-void GraphicMenu::animationSlideMenu() {
+void GraphicMenu::animationSlideMenu(void) {
     if (!this->_fade) {
         this->getReadyNext();
         this->_fade = true;
@@ -100,11 +100,11 @@ void GraphicMenu::animationSlideMenu() {
     }
 }
 
-bool GraphicMenu::getAnimation(void) const{
+bool &GraphicMenu::getAnimation(void){
     return (this->_stopAnimation);
 }
 
-//*****************************************************************GETTERS
+//*********************************GETTERS*********************************
 Button &GraphicMenu::getButtonHelp(void){
     return (this->_buttonHelp);
 }
@@ -124,7 +124,7 @@ int &GraphicMenu::getCurrentIndex(void){
 sf::Texture &GraphicMenu::getCurrentTexture(void){
     return (this->_textureMenu[this->_currentSpriteIndex]);
 }
-//*****************************************************************SETTERS
+//*********************************SETTERS*********************************
 bool &GraphicMenu::setAnimation(bool value){
     this->_stopAnimation = value;
     return (this->_stopAnimation);

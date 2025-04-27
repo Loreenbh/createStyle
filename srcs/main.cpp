@@ -28,6 +28,7 @@ int main()
         else if (game->getStatus() == HELP){
             game->getGraphic()->getGraphicHelp()->drawWindowHelp();
         }
+        
     }
     delete(game);
     return (0);

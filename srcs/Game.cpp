@@ -1,6 +1,6 @@
 #include "Game.hpp"
 
-//*****************************************************************CONSTRUCTOR
+//*********************************CONSTRUCTOR*********************************
 Game::Game() : 
     _state(MENU), _graphics(nullptr){
     try{
@@ -20,18 +20,16 @@ Game::~Game(){
     std::cout << "Game destroyed" << std::endl;
 }
 
-//*****************************************************************PUBLIC METHODS
+//*********************************PUBLIC METHODS*********************************
 
-void Game::selectEventMenu(){
+void Game::selectEventMenu(void){
     this->hoverButtonsMenu(); //met a jour booleen animation
     if (this->getEvent().type == sf::Event::MouseButtonPressed)
         this->checkButtonMenuPressed();
 }
 
-void Game::selectEventHelp(){
+void Game::selectEventHelp(void){
     if (this->getEvent().type == sf::Event::MouseWheelScrolled){
-        // std::cout << "croll" << std::endl;
-        // this->getGraphic()->getGraphicHelp()->setScroll(true);
         if (this->getEvent().mouseWheelScroll.wheel == sf::Mouse::VerticalWheel){
             //avant de move je vérifie si ca dépasse
             float viewTop = this->getGraphic()->getGraphicHelp()->getView().getCenter().y
@@ -40,14 +38,13 @@ void Game::selectEventHelp(){
                 + this->getGraphic()->getGraphicHelp()->getView().getSize().y / 2;
             float spriteTop = this->getGraphic()->getGraphicHelp()->getSprite().getGlobalBounds().top;
             float spriteBottom = spriteTop + this->getGraphic()->getGraphicHelp()->getSprite().getGlobalBounds().height;
-            if (viewTop + this->getEvent().mouseWheelScroll.delta <= spriteTop ||
-                viewBottom + this->getEvent().mouseWheelScroll.delta <= spriteBottom){
+            float moveY = -this->getEvent().mouseWheelScroll.delta * 26.f;
+            if (viewTop + moveY >= spriteTop && viewBottom + moveY <= spriteBottom){
                     this->getGraphic()->getGraphicHelp()->getView().move
-                    (0, this->getEvent().mouseWheelScroll.delta * 26.f);
+                    (0, -this->getEvent().mouseWheelScroll.delta * 26.f);
+                    this->getGraphic()->getWindow().setView(
+                        this->getGraphic()->getGraphicHelp()->getView());
                 }
-            this->getGraphic()->getWindow().setView(
-                this->getGraphic()->getGraphicHelp()->getView());
-            // this->_graphic->getWindow().draw(this->_sprite);
             }
     }
 }
@@ -62,7 +59,7 @@ void Game::checkButtonMenuPressed(void){
         this->setStatus(PLAY);
 }
 
-bool Game::hoverButtonsMenu(){
+bool Game::hoverButtonsMenu(void){
     sf::Vector2i mousePos = sf::Mouse::getPosition(this->_graphics->getWindow());
     if (this->_graphics->getGraphicMenu()->getButtonPlay().getGlobalBounds().contains(mousePos.x, mousePos.y))
         this->_graphics->getGraphicMenu()->getButtonPlay().setFillColor(sf::Color::Red);
@@ -77,25 +74,25 @@ bool Game::hoverButtonsMenu(){
 }
 
 
-void Game::closeWindow(){
+void Game::closeWindow(void){
     this->_graphics->getWindow().close();
 }
 
-//*****************************************************************GETTERS
-Graphic *Game::getGraphic() const{
+//*********************************GETTERS*********************************
+Graphic *Game::getGraphic(void) const{
     return (this->_graphics);
 }
 
-GameState Game::getStatus() const{
+GameState &Game::getStatus(void){
     return (this->_state);
 }
 
-sf::Event &Game::getEvent(){
+sf::Event &Game::getEvent(void){
     return (this->_event);
 }
 
-//*****************************************************************SETTERS
-GameState Game::setStatus(GameState status){
+//*********************************SETTERS*********************************
+GameState &Game::setStatus(GameState status){
     this->_state = status;
     return (this->_state);
 }

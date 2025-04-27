@@ -8,29 +8,29 @@ class Graphic;
 
 class GraphicHelp {
     private:
-        Button      _buttonReturn;
-        Graphic     *_graphic;
+        Button _buttonReturn;
+        Graphic *_graphic;
         sf::Texture _texture;
-        sf::Sprite  _sprite;
-        sf::View    _view;
-        bool        _scroll;
+        sf::Sprite _sprite;
+        sf::View _view;
     public:
-        //Constructor
+        //********Constructor*********
         GraphicHelp(Graphic *graphic);
-
-        //Destructor
+        //********Destructor*********
         ~GraphicHelp();  
     
-        //Public Methods
+
+        //********Public Methods*********
         void    loadSceneHelp(void);
         void    drawWindowHelp(void);
 
-        //Getters
-        sf::View &getView();
-        sf::Sprite &getSprite();
 
-        //Setters
-        bool &setScroll(bool value);
+        //********Getters*********
+        sf::View &getView(void);
+        sf::Sprite &getSprite(void);
+
+
+        //********Setters*********
 
     };
 

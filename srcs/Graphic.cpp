@@ -1,6 +1,6 @@
 #include "Graphic.hpp"
 
-//*****************************************************************CONSTRUCTOR
+//*********************************CONSTRUCTOR*********************************
 Graphic::Graphic(int windowWidth, int windowHeight) :
 _window(),
 _ratio(2.0f),
@@ -24,8 +24,8 @@ Graphic::~Graphic(){
 }
 
 
-//*****************************************************************PUBLIC METHODS
-void Graphic::initGraphicMenu(){
+//*********************************PUBLIC METHODS*********************************
+void Graphic::initGraphicMenu(void){
     try{
         this->_graphicMenu = new GraphicMenu(this); 
         this->_graphicMenu->loadSceneMenu();
@@ -36,7 +36,7 @@ void Graphic::initGraphicMenu(){
     std::cout << "GraphicMenu created" << std::endl;
 }
 
-void Graphic::initGraphicHelp(){
+void Graphic::initGraphicHelp(void){
     try{
         this->_graphicHelp = new GraphicHelp(this); 
         this->_graphicHelp->loadSceneHelp();
@@ -47,7 +47,7 @@ void Graphic::initGraphicHelp(){
     std::cout << "GraphicHelp created" << std::endl;
 }
 
-void Graphic::adjustWinSize() {
+void Graphic::adjustWinSize(void) {
     unsigned int height = this->_windowHeight;
     unsigned int width = this->_windowWidth;
 
@@ -78,7 +78,7 @@ void Graphic::adjustWinSize() {
 }
 
 
-void Graphic::createWindow(){
+void Graphic::createWindow(void){
     this->adjustWinSize();
     this->_window.create(sf::VideoMode(this->_windowWidth, this->_windowHeight), "Mon Jeu");
     if (!this->_window.isOpen()) 
@@ -108,19 +108,19 @@ void    Graphic::adaptHeightToWin(sf::Texture &texture, sf::Sprite &sprite){
     }
 }
 
-bool Graphic::isWindowOpen() {
+bool Graphic::isWindowOpen(void) {
     return (this->_window.isOpen());
 }
 
-void    Graphic::clearWindow(){
+void    Graphic::clearWindow(void){
     this->_window.clear();
 }
 
-void    Graphic::displayWindow(){
+void    Graphic::displayWindow(void){
     this->_window.display();
 }
 
-void Graphic::handleMenuAnimation() {
+void Graphic::handleMenuAnimation(void) {
     this->clearWindow();
     if (!this->getGraphicMenu()->getAnimation()){
         this->_graphicMenu->animationSlideMenu();
@@ -136,40 +136,40 @@ void Graphic::handleMenuAnimation() {
     this->getWindow().draw(this->getGraphicMenu()->getButtonPlay().getText());
     this->getWindow().draw(this->getGraphicMenu()->getButtonHelp());
     this->getWindow().draw(this->getGraphicMenu()->getButtonHelp().getText());
-    this->displayWindow();
+    this->displayWindow(); 
 }
 
-void Graphic::handleHelpAnimation(){
+void Graphic::handleHelpAnimation(void){
     this->clearWindow();
     this->_window.draw(this->getGraphicHelp()->getSprite());
     this->displayWindow();
 }
 
-//*****************************************************************GETTERS
-sf::RenderWindow &Graphic::getWindow(){
+//*********************************GETTERS*********************************
+sf::RenderWindow &Graphic::getWindow(void){
     return (this->_window);
 }
 
-float &Graphic::getRefWinWidth(){
+float &Graphic::getRefWinWidth(void){
     return (this->_windowRefWidth);
 }
 
-float &Graphic::getRefWinHeight(){
+float &Graphic::getRefWinHeight(void){
     return (this->_windowRefHeight);
 }
 
-float &Graphic::getWidthWin() {
+float &Graphic::getWidthWin(void) {
     return (this->_windowWidth);
 }
 
-float &Graphic::getHeigthWin() {
+float &Graphic::getHeigthWin(void) {
     return (this->_windowHeight);
 }
 
-GraphicMenu  *Graphic::getGraphicMenu(){
+GraphicMenu  *Graphic::getGraphicMenu(void){
     return (this->_graphicMenu);
 }
 
-GraphicHelp  *Graphic::getGraphicHelp(){
+GraphicHelp  *Graphic::getGraphicHelp(void){
     return (this->_graphicHelp);
 }

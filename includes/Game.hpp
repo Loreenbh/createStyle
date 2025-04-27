@@ -14,34 +14,38 @@ enum GameState {
 
 class Game {
     private:
-        sf::Event           _event;
-        GameState           _state;
-        Graphic            *_graphics;
+        sf::Event _event;
+        GameState _state;
+        Graphic *_graphics;
         // Input               *input;
         // Audio               *audio;
         // Scene               *scene;
 
     public:
-        //Constructor
+        //********Constructor*********
         Game();
-        //Destructor
+        //********Destructor*********
         ~Game();  
     
-        //Public Methods
-            //Menu
-        void    checkButtonMenuPressed();
-        void    closeWindow();
-        bool    hoverButtonsMenu();
-        void    selectEventMenu(void);
-            //Help
-        void    selectEventHelp(void);
-        //Getters
-        Graphic *getGraphic() const;
-        GameState getStatus() const;
-        sf::Event   &getEvent();
 
-        //Setters
-        GameState setStatus(GameState status);
+        //********Public Methods*********
+        void closeWindow(void);
+                    //Menu
+        void checkButtonMenuPressed(void);
+        bool hoverButtonsMenu(void);
+        void selectEventMenu(void);
+                    //Help
+        void selectEventHelp(void);
+
+
+        //*********Getters**************
+        Graphic *getGraphic(void) const;
+        GameState &getStatus(void);
+        sf::Event &getEvent(void);
+
+
+        //*********Setters**************
+        GameState &setStatus(GameState status);
 
     };
 
