@@ -13,10 +13,10 @@ class Graphic {
         const float _ratio;
         float _windowWidth;
         float _windowHeight;
-        float _windowRefWidth;
-        float _windowRefHeight;
-        float _windowRefMaxWidth;
-        float _windowRefMaxHeight;
+        float _winRefWidth;
+        float _winRefHeight;
+        float _winRefMaxWidth;
+        float _winRefMaxHeight;
         GraphicMenu *_graphicMenu;
         GraphicHelp *_graphicHelp;
     
@@ -51,7 +51,6 @@ class Graphic {
         float &getHeigthWin(void);
         GraphicMenu *getGraphicMenu(void);
         GraphicHelp *getGraphicHelp(void);
-
     };
 
 

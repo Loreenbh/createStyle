@@ -6,7 +6,6 @@
 #include <vector>
 
 class Graphic;
-#include "Button.hpp"
 
 //LANCER LE JEU SI SEULEMENT 2 SPRITES OU PLUS
 class GraphicMenu {
@@ -16,15 +15,23 @@ class GraphicMenu {
         sf::Sprite _currentSprite;
         std::vector<std::string> _pathSceneMenu;
         std::vector<sf::Texture> _textureMenu;
-        bool _stopAnimation;
+        sf::Sprite _nextSprite; 
+        bool _stopFade;
         bool _fade;
         float _fadeDuration;
         float _waitDuration;
         float _currOpacity;
         sf::Clock _clock;
-        sf::Sprite _nextSprite;
-        Button _buttonHelp;
-        Button _buttonPlay;
+        
+        //Button Help
+        sf::Texture _buttonHelpT;
+        sf::Sprite _buttonHelpS;
+        float _refPosX;
+        float _refPosY;
+        float _refWidth;
+        float _refHeigth;
+        sf::Text _buttonTxt;
+        sf::Font _buttonFont;
 
     public:
         //********Constructor*********
@@ -37,18 +44,24 @@ class GraphicMenu {
         void drawWindowMenu(void);
         void animationSlideMenu(void);
         void getReadyNext(void);
+        void createButton(void);
+        void setSprite(std::string path, sf::Sprite &sprite, sf::Texture &texture);
         
         //********Getters*********
-        Button &getButtonPlay(void);
-        Button &getButtonHelp(void);
-        bool &getAnimation(void);
+        bool &getFade(void);
         sf::Sprite &getCurrentSprite(void);
         int &getCurrentIndex(void);
         sf::Texture &getCurrentTexture(void);
-
+        sf::Texture &getHelpButtonTexture(void);
+        sf::Sprite &getHelpButton(void);
+        sf::Text &getHelpButtonTxt(void);
+        float getRefPosX(void);
+        float getRefPosY(void);
+        float getRefWidth(void);
+        float getRefHeigth(void);
 
         //********Setters*********
-        bool &setAnimation(bool value);
+        bool &setFade(bool value);
 
     };
 

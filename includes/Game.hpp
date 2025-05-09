@@ -3,7 +3,6 @@
 
 #include <SFML/Graphics.hpp>
 #include <Graphic.hpp>
-// #include <iostream>
 
 enum GameState {
     MENU,
@@ -17,6 +16,8 @@ class Game {
         sf::Event _event;
         GameState _state;
         Graphic *_graphics;
+        sf::Shader _blurShader;
+        bool _helpButtonPressed;
         // Input               *input;
         // Audio               *audio;
         // Scene               *scene;
@@ -31,7 +32,6 @@ class Game {
         //********Public Methods*********
         void closeWindow(void);
                     //Menu
-        void checkButtonMenuPressed(void);
         bool hoverButtonsMenu(void);
         void selectEventMenu(void);
                     //Help
@@ -42,7 +42,6 @@ class Game {
         Graphic *getGraphic(void) const;
         GameState &getStatus(void);
         sf::Event &getEvent(void);
-
 
         //*********Setters**************
         GameState &setStatus(GameState status);

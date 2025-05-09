@@ -2,9 +2,9 @@
 
 //*********************************CONSTRUCTOR*********************************
 Game::Game() : 
-    _state(MENU), _graphics(nullptr){
+    _event(), _state(MENU), _graphics(nullptr), _helpButtonPressed(false){
     try{
-        _graphics = new Graphic(100, 100); //rien a verifier
+        _graphics = new Graphic(10, 10); //rien a verifier
         _graphics->createWindow(); //check fenetre closed
         _graphics->initGraphicMenu(); //creation de scene Menu
         _graphics->initGraphicHelp(); //creation de scene Help
@@ -24,53 +24,43 @@ Game::~Game(){
 
 void Game::selectEventMenu(void){
     this->hoverButtonsMenu(); //met a jour booleen animation
-    if (this->getEvent().type == sf::Event::MouseButtonPressed)
-        this->checkButtonMenuPressed();
+    sf::Vector2i mousePos = sf::Mouse::getPosition(this->getGraphic()->getWindow());
+    if (this->getEvent().type == sf::Event::MouseButtonPressed && this->getEvent().mouseButton.button == sf::Mouse::Left){
+        if (this->getGraphic()->getGraphicMenu()->getHelpButton().getGlobalBounds().contains(mousePos.x, mousePos.y)){
+            this->getGraphic()->getGraphicMenu()->setSprite("../scenes/sceneMenu/buttonHelpClic.png", 
+                this->getGraphic()->getGraphicMenu()->getHelpButton(), this->getGraphic()->getGraphicMenu()->getHelpButtonTexture());
+            this->_helpButtonPressed = true;
+        }
+    }
+
+    if (this->getEvent().type == sf::Event::MouseButtonReleased && this->getEvent().mouseButton.button == sf::Mouse::Left){
+        if (this->_helpButtonPressed &&
+            this->getGraphic()->getGraphicMenu()->getHelpButton().getGlobalBounds().contains(mousePos.x, mousePos.y)) {
+            this->setStatus(HELP);
+            this->getGraphic()->getGraphicHelp()->getBlur() = true;
+            this->_helpButtonPressed = false;
+        }
+    }
 }
 
 void Game::selectEventHelp(void){
-    if (this->getEvent().type == sf::Event::MouseWheelScrolled){
-        if (this->getEvent().mouseWheelScroll.wheel == sf::Mouse::VerticalWheel){
-            //avant de move je vérifie si ca dépasse
-            float viewTop = this->getGraphic()->getGraphicHelp()->getView().getCenter().y
-                - this->getGraphic()->getGraphicHelp()->getView().getSize().y / 2;
-            float viewBottom = this->getGraphic()->getGraphicHelp()->getView().getCenter().y
-                + this->getGraphic()->getGraphicHelp()->getView().getSize().y / 2;
-            float spriteTop = this->getGraphic()->getGraphicHelp()->getSprite().getGlobalBounds().top;
-            float spriteBottom = spriteTop + this->getGraphic()->getGraphicHelp()->getSprite().getGlobalBounds().height;
-            float moveY = -this->getEvent().mouseWheelScroll.delta * 26.f;
-            if (viewTop + moveY >= spriteTop && viewBottom + moveY <= spriteBottom){
-                    this->getGraphic()->getGraphicHelp()->getView().move
-                    (0, -this->getEvent().mouseWheelScroll.delta * 26.f);
-                    this->getGraphic()->getWindow().setView(
-                        this->getGraphic()->getGraphicHelp()->getView());
-                }
-            }
+    if (this->getEvent().type == sf::Event::KeyPressed && 
+        this->getEvent().key.code == sf::Keyboard::Enter && this->_graphics->getGraphicHelp()->getSpriteDisplayed()){
+        this->getGraphic()->getGraphicHelp()->getPressEnter() = true;
     }
-}
-
-void Game::checkButtonMenuPressed(void){
-    sf::Vector2i mousePos = sf::Mouse::getPosition(this->getGraphic()->getWindow());
-    if (this->getGraphic()->getGraphicMenu()->getButtonHelp().getGlobalBounds().contains(mousePos.x, mousePos.y)){
-        this->setStatus(HELP);
-        this->getGraphic()->getGraphicHelp()->drawWindowHelp();
-    }
-    else if (this->getGraphic()->getGraphicMenu()->getButtonPlay().getGlobalBounds().contains(mousePos.x, mousePos.y))
-        this->setStatus(PLAY);
 }
 
 bool Game::hoverButtonsMenu(void){
     sf::Vector2i mousePos = sf::Mouse::getPosition(this->_graphics->getWindow());
-    if (this->_graphics->getGraphicMenu()->getButtonPlay().getGlobalBounds().contains(mousePos.x, mousePos.y))
-        this->_graphics->getGraphicMenu()->getButtonPlay().setFillColor(sf::Color::Red);
-    else if (this->_graphics->getGraphicMenu()->getButtonHelp().getGlobalBounds().contains(mousePos.x, mousePos.y))
-        this->_graphics->getGraphicMenu()->getButtonHelp().setFillColor(sf::Color::Green);
-    else{
-        this->_graphics->getGraphicMenu()->getButtonPlay().setFillColor(sf::Color::White);
-        this->_graphics->getGraphicMenu()->getButtonHelp().setFillColor(sf::Color::White);
-        return (this->getGraphic()->getGraphicMenu()->setAnimation(false));
+    if (this->getGraphic()->getGraphicMenu()->getHelpButton().getGlobalBounds().contains(mousePos.x, mousePos.y)){
+        this->getGraphic()->getGraphicMenu()->setSprite("../scenes/sceneMenu/buttonHelpHover.png", 
+            this->getGraphic()->getGraphicMenu()->getHelpButton(), this->getGraphic()->getGraphicMenu()->getHelpButtonTexture());
+        }else{
+        this->getGraphic()->getGraphicMenu()->setSprite("../scenes/sceneMenu/buttonHelp.png", 
+            this->getGraphic()->getGraphicMenu()->getHelpButton(), this->getGraphic()->getGraphicMenu()->getHelpButtonTexture());
+        return (this->getGraphic()->getGraphicMenu()->setFade(false));
     }
-    return (this->getGraphic()->getGraphicMenu()->setAnimation(true));
+    return (this->getGraphic()->getGraphicMenu()->setFade(true));
 }
 
 

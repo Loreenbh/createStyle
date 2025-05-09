@@ -8,7 +8,6 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/mnt/c/Users/Lilia/Downloads/stylish/srcs/Button.cpp" "CMakeFiles/MonJeu.dir/srcs/Button.cpp.o" "gcc" "CMakeFiles/MonJeu.dir/srcs/Button.cpp.o.d"
   "/mnt/c/Users/Lilia/Downloads/stylish/srcs/Game.cpp" "CMakeFiles/MonJeu.dir/srcs/Game.cpp.o" "gcc" "CMakeFiles/MonJeu.dir/srcs/Game.cpp.o.d"
   "/mnt/c/Users/Lilia/Downloads/stylish/srcs/Graphic.cpp" "CMakeFiles/MonJeu.dir/srcs/Graphic.cpp.o" "gcc" "CMakeFiles/MonJeu.dir/srcs/Graphic.cpp.o.d"
   "/mnt/c/Users/Lilia/Downloads/stylish/srcs/GraphicHelp.cpp" "CMakeFiles/MonJeu.dir/srcs/GraphicHelp.cpp.o" "gcc" "CMakeFiles/MonJeu.dir/srcs/GraphicHelp.cpp.o.d"

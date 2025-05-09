@@ -129,30 +129,6 @@ MonJeu/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/MonJeu.dir/build.make CMakeFiles/MonJeu.dir/build
 .PHONY : MonJeu/fast
 
-srcs/Button.o: srcs/Button.cpp.o
-.PHONY : srcs/Button.o
-
-# target to build an object file
-srcs/Button.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MonJeu.dir/build.make CMakeFiles/MonJeu.dir/srcs/Button.cpp.o
-.PHONY : srcs/Button.cpp.o
-
-srcs/Button.i: srcs/Button.cpp.i
-.PHONY : srcs/Button.i
-
-# target to preprocess a source file
-srcs/Button.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MonJeu.dir/build.make CMakeFiles/MonJeu.dir/srcs/Button.cpp.i
-.PHONY : srcs/Button.cpp.i
-
-srcs/Button.s: srcs/Button.cpp.s
-.PHONY : srcs/Button.s
-
-# target to generate assembly for a file
-srcs/Button.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MonJeu.dir/build.make CMakeFiles/MonJeu.dir/srcs/Button.cpp.s
-.PHONY : srcs/Button.cpp.s
-
 srcs/Game.o: srcs/Game.cpp.o
 .PHONY : srcs/Game.o
 
@@ -282,9 +258,6 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... MonJeu"
-	@echo "... srcs/Button.o"
-	@echo "... srcs/Button.i"
-	@echo "... srcs/Button.s"
 	@echo "... srcs/Game.o"
 	@echo "... srcs/Game.i"
 	@echo "... srcs/Game.s"

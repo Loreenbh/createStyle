@@ -228,7 +228,7 @@ MonJeu_IS_TOP_LEVEL:STATIC=ON
 MonJeu_SOURCE_DIR:STATIC=/mnt/c/Users/Lilia/Downloads/stylish
 
 //Chemin vers le répertoire de SFML
-SFML_DIR:BOOL=/mnt/c/Users/Lilia/Downloads/stylish/SFML/
+SFML_DIR:BOOL=/mnt/c/Users/Lilia/Downloads/stylish/SFML
 
 
 ########################

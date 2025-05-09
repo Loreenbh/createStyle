@@ -6,10 +6,10 @@ _window(),
 _ratio(2.0f),
 _windowWidth(windowWidth),
 _windowHeight(windowHeight),
-_windowRefWidth(900),
-_windowRefHeight(600),
-_windowRefMaxHeight(1080),
-_windowRefMaxWidth(1920),
+_winRefWidth(900),
+_winRefHeight(600),
+_winRefMaxHeight(1080),
+_winRefMaxWidth(1920),
 _graphicMenu(nullptr),
 _graphicHelp(nullptr)
 {
@@ -22,7 +22,6 @@ Graphic::~Graphic(){
     if (this->_graphicHelp)
         delete this->_graphicHelp;
 }
-
 
 //*********************************PUBLIC METHODS*********************************
 void Graphic::initGraphicMenu(void){
@@ -38,7 +37,7 @@ void Graphic::initGraphicMenu(void){
 
 void Graphic::initGraphicHelp(void){
     try{
-        this->_graphicHelp = new GraphicHelp(this); 
+        this->_graphicHelp = new GraphicHelp(this, this->getGraphicMenu()); 
         this->_graphicHelp->loadSceneHelp();
     }
     catch(std::exception &e){
@@ -67,13 +66,13 @@ void Graphic::adjustWinSize(void) {
         this->_windowHeight = static_cast<unsigned int>(width / ratio);
         this->_windowWidth = width;
     }
-    if (this->_windowWidth > this->_windowRefMaxWidth) {
-        this->_windowWidth = this->_windowRefMaxWidth;
-        this->_windowHeight = static_cast<unsigned int>(this->_windowRefMaxWidth / ratio);
+    if (this->_windowWidth > this->_winRefMaxWidth) {
+        this->_windowWidth = this->_winRefMaxWidth;
+        this->_windowHeight = static_cast<unsigned int>(this->_winRefMaxWidth / ratio);
     }
-    if (this->_windowHeight > this->_windowRefMaxHeight) {
-        this->_windowHeight = this->_windowRefMaxHeight;
-        this->_windowWidth = static_cast<unsigned int>(this->_windowRefMaxHeight * ratio);
+    if (this->_windowHeight > this->_winRefMaxHeight) {
+        this->_windowHeight = this->_winRefMaxHeight;
+        this->_windowWidth = static_cast<unsigned int>(this->_winRefMaxHeight * ratio);
     }
 }
 
@@ -122,7 +121,7 @@ void    Graphic::displayWindow(void){
 
 void Graphic::handleMenuAnimation(void) {
     this->clearWindow();
-    if (!this->getGraphicMenu()->getAnimation()){
+    if (!this->getGraphicMenu()->getFade()){
         this->_graphicMenu->animationSlideMenu();
         this->_graphicMenu->drawWindowMenu();
     }
@@ -132,17 +131,43 @@ void Graphic::handleMenuAnimation(void) {
         this->getGraphicMenu()->getCurrentSprite().setColor(sf::Color(255, 255, 255, 255));
     }
     this->getWindow().draw(this->getGraphicMenu()->getCurrentSprite());
-    this->getWindow().draw(this->getGraphicMenu()->getButtonPlay());
-    this->getWindow().draw(this->getGraphicMenu()->getButtonPlay().getText());
-    this->getWindow().draw(this->getGraphicMenu()->getButtonHelp());
-    this->getWindow().draw(this->getGraphicMenu()->getButtonHelp().getText());
+    this->getWindow().draw(this->getGraphicMenu()->getHelpButton());
+    this->getWindow().draw(this->getGraphicMenu()->getHelpButtonTxt());
     this->displayWindow(); 
 }
 
 void Graphic::handleHelpAnimation(void){
-    this->clearWindow();
-    this->_window.draw(this->getGraphicHelp()->getSprite());
-    this->displayWindow();
+    if (!this->getGraphicHelp()->getEndBlur())
+        this->getGraphicHelp()->applyBlur();
+    else{
+        if (this->getGraphicHelp()->getPressEnter()){ //tant que animation pas fini tu rentrres pas
+            if (this->getGraphicHelp()->getSpriteDisplayed() && this->getGraphicHelp()->getCurrentSpriteIndex() + 1 < this->getGraphicHelp()->getRulesGame().size()){
+                this->getGraphicHelp()->getPressEnter() = false;
+                this->getGraphicHelp()->getSpriteDisplayed() = false;
+                this->getGraphicHelp()->getCurrentSpriteIndex() += 1;
+                this->getGraphicHelp()->getCurrentSprite().setTexture(this->_graphicHelp->getRulesGame()[this->getGraphicHelp()->getCurrentSpriteIndex()]);
+                this->adaptHeightToWin(this->getGraphicHelp()->getRulesGame()[this->getGraphicHelp()->getCurrentSpriteIndex()], 
+                    this->getGraphicHelp()->getCurrentSprite());
+                this->getGraphicHelp()->getElapsedTime() = 0.0f;
+                this->getGraphicHelp()->getBlurProgress() = 0.0f;
+            }
+        }
+        this->clearWindow();
+        this->getGraphicHelp()->drawBlurBackground();
+        this->getGraphicHelp()->ruleAnimation(this->getGraphicHelp()->getCurrentSpriteIndex(), this->getGraphicHelp()->getBlurProgress());
+        std::vector<sf::Sprite>::iterator it = this->getGraphicHelp()->getDisplayedSprites().begin();
+        for (it ; it != this->getGraphicHelp()->getDisplayedSprites().end() ; ++it){
+            this->_window.draw(*it);
+        }
+        //dessiner les anciens sprites sauvegardés;
+        this->_window.draw(this->getGraphicHelp()->getCurrentSprite());
+        //ajouter seulement si existe pas
+        if (this->getGraphicHelp()->getSpriteDisplayed() && this->getGraphicHelp()->getCurrentSpriteIndex() == static_cast<int>(this->getGraphicHelp()->getDisplayedSprites().size())) {
+            std::cout << "sprite[" << this->getGraphicHelp()->getCurrentSpriteIndex() << "] est ajouté" << std::endl;
+            this->getGraphicHelp()->getDisplayedSprites().push_back(this->getGraphicHelp()->getCurrentSprite());
+        }
+        this->displayWindow();
+    }
 }
 
 //*********************************GETTERS*********************************
@@ -151,11 +176,11 @@ sf::RenderWindow &Graphic::getWindow(void){
 }
 
 float &Graphic::getRefWinWidth(void){
-    return (this->_windowRefWidth);
+    return (this->_winRefWidth);
 }
 
 float &Graphic::getRefWinHeight(void){
-    return (this->_windowRefHeight);
+    return (this->_winRefHeight);
 }
 
 float &Graphic::getWidthWin(void) {

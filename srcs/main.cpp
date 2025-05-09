@@ -26,7 +26,7 @@ int main()
         if (game->getStatus() ==  MENU)
             game->getGraphic()->handleMenuAnimation();
         else if (game->getStatus() == HELP){
-            game->getGraphic()->getGraphicHelp()->drawWindowHelp();
+            game->getGraphic()->handleHelpAnimation();
         }
         
     }
