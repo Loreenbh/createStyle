@@ -131,8 +131,8 @@ void Graphic::handleMenuAnimation(void) {
         this->getGraphicMenu()->getCurrentSprite().setColor(sf::Color(255, 255, 255, 255));
     }
     this->getWindow().draw(this->getGraphicMenu()->getCurrentSprite());
-    this->getWindow().draw(this->getGraphicMenu()->getHelpButton());
-    this->getWindow().draw(this->getGraphicMenu()->getHelpButtonTxt());
+    this->getWindow().draw(this->getGraphicMenu()->getHelpButton().getHelpButtonSprite());
+    this->getWindow().draw(this->getGraphicMenu()->getHelpButton().getHelpButtonTxt());
     this->displayWindow(); 
 }
 
@@ -141,12 +141,14 @@ void Graphic::handleHelpAnimation(void){
         this->getGraphicHelp()->applyBlur();
     else{
         if (this->getGraphicHelp()->getPressEnter()){ //tant que animation pas fini tu rentrres pas
-            if (this->getGraphicHelp()->getSpriteDisplayed() && this->getGraphicHelp()->getCurrentSpriteIndex() + 1 < this->getGraphicHelp()->getRulesGame().size()){
+            if (this->getGraphicHelp()->getSpriteDisplayed() && 
+                this->getGraphicHelp()->getCurrentSpriteIndex() + 1 < this->getGraphicHelp()->getRulesGame().size()){
                 this->getGraphicHelp()->getPressEnter() = false;
                 this->getGraphicHelp()->getSpriteDisplayed() = false;
                 this->getGraphicHelp()->getCurrentSpriteIndex() += 1;
-                this->getGraphicHelp()->getCurrentSprite().setTexture(this->_graphicHelp->getRulesGame()[this->getGraphicHelp()->getCurrentSpriteIndex()]);
-                this->adaptHeightToWin(this->getGraphicHelp()->getRulesGame()[this->getGraphicHelp()->getCurrentSpriteIndex()], 
+                this->getGraphicHelp()->getCurrentSprite().setTexture
+                (this->_graphicHelp->getRulesGame()[this->getGraphicHelp()->getCurrentSpriteIndex()].first);
+                this->adaptHeightToWin(this->getGraphicHelp()->getRulesGame()[this->getGraphicHelp()->getCurrentSpriteIndex()].first, 
                     this->getGraphicHelp()->getCurrentSprite());
                 this->getGraphicHelp()->getElapsedTime() = 0.0f;
                 this->getGraphicHelp()->getBlurProgress() = 0.0f;
@@ -154,7 +156,10 @@ void Graphic::handleHelpAnimation(void){
         }
         this->clearWindow();
         this->getGraphicHelp()->drawBlurBackground();
-        this->getGraphicHelp()->ruleAnimation(this->getGraphicHelp()->getCurrentSpriteIndex(), this->getGraphicHelp()->getBlurProgress());
+        // this->getGraphicHelp()->ruleAnimation(this->getGraphicHelp()->getCurrentSpriteIndex(), 
+        //     ,this->getGraphicHelp()->getBlurProgress());
+        this->getGraphicHelp()->ruleAnimation(this->getGraphicHelp()->getCurrentSpriteIndex(), 
+        this->getGraphicHelp()->getRulesGame()[this->getGraphicHelp()->getCurrentSpriteIndex()].second ,this->getGraphicHelp()->getBlurProgress());
         std::vector<sf::Sprite>::iterator it = this->getGraphicHelp()->getDisplayedSprites().begin();
         for (it ; it != this->getGraphicHelp()->getDisplayedSprites().end() ; ++it){
             this->_window.draw(*it);

@@ -1,21 +1,22 @@
 #include "Graphic.hpp"
 
 //*********************************CONSTRUCTOR*********************************
+FadeEffect::FadeEffect(bool s, bool f, float fd, float wd, float op, sf::Clock c)
+: _stopFade(s), _fade(f), _fadeDuration(fd), _waitDuration(wd), _currOpacity(op), _clock(c) {};
+
+HelpButton::HelpButton(sf::Texture t, sf::Sprite s, sf::Text txt, sf::Font f, float x, 
+    float y, float w, float h)
+: _buttonHelpT(t), _buttonHelpS(s), _buttonTxt(txt), _buttonFont(f), 
+    _refPosX(x), _refPosY(y), _refWidth(w), _refHeigth(h) {};
+
+
 GraphicMenu::GraphicMenu(Graphic *graphic) : 
 _graphic(graphic),
+_fadeEffect(false, false, 2.0f, 5.0f, 0.f, sf::Clock()),
+_helpButton(sf::Texture(), sf::Sprite(), sf::Text(), sf::Font(), 127, 78, 116, 22),
 _currentSpriteIndex(0),
 _currentSprite(),
-_stopFade(false),
-_fade(false),
-_fadeDuration(2.f),
-_waitDuration(5.f),
-_currOpacity(0.f),
-_clock(),
-_nextSprite(),
-_refPosX(127),
-_refPosY(78),
-_refWidth(116),
-_refHeigth(22)
+_nextSprite()
 {
     _pathSceneMenu.push_back("../scenes/sceneMenu/scene0.png");
     _pathSceneMenu.push_back("../scenes/sceneMenu/scene1.png");
@@ -32,9 +33,9 @@ GraphicMenu::~GraphicMenu(){
 //*********************************PUBLIC METHODS*********************************
 
 void   GraphicMenu::createButton(void){
-    if (!this->_buttonHelpT.loadFromFile("../scenes/sceneMenu/buttonHelp.png"))
+    if (!this->_helpButton._buttonHelpT.loadFromFile("../scenes/sceneMenu/buttonHelp.png"))
         throw std::runtime_error("GraphicMenu: The texture has not been loaded");
-    this->_buttonHelpS.setTexture(this->_buttonHelpT);
+        this->_helpButton._buttonHelpS.setTexture(this->_helpButton._buttonHelpT);
     
     sf::Vector2u windowSize = this->_graphic->getWindow().getSize();
     float scaleX = static_cast<float>(windowSize.x) / this->_graphic->getRefWinWidth();
@@ -43,27 +44,27 @@ void   GraphicMenu::createButton(void){
     //Calculer la pos
     float buttonPosX;
     float buttonPosY;
-    buttonPosX = this->_refPosX * scaleX;
-    buttonPosY = this->_refPosY * scaleY;
+    buttonPosX = this->_helpButton._refPosX * scaleX;
+    buttonPosY = this->_helpButton._refPosY * scaleY;
     
     //Calculer la taille
-    float buttonWidth = this->_refWidth * scaleX;
-    float buttonHeight = this->_refHeigth * scaleY;
+    float buttonWidth = this->_helpButton._refWidth * scaleX;
+    float buttonHeight = this->_helpButton._refHeigth * scaleY;
     
     //Appliquer la nouvelle pos
-    this->_buttonHelpS.setPosition(buttonPosX, buttonPosY);
-    this->_buttonHelpS.setScale(scaleX, scaleY);
+    this->_helpButton._buttonHelpS.setPosition(buttonPosX, buttonPosY);
+    this->_helpButton._buttonHelpS.setScale(scaleX, scaleY);
 
-    if (!this->_buttonFont.loadFromFile("../fonts/Napzer.otf"))
+    if (!this->_helpButton._buttonFont.loadFromFile("../fonts/Napzer.otf"))
         throw std::runtime_error("Erreur : impossible de charger la police Napzer.otf");
     float textScale = (scaleX + scaleY) / 2.0f;
     int scaledFontSize = static_cast<int>(20.0f * textScale);
 
-    this->_buttonTxt.setFont(this->_buttonFont);
-    this->_buttonTxt.setString("help");
-    this->_buttonTxt.setCharacterSize(scaledFontSize);
-    this->_buttonTxt.setFillColor(sf::Color::Black);
-    this->_buttonTxt.setPosition(buttonPosX + 7, buttonPosY - 3);
+    this->_helpButton._buttonTxt.setFont(this->_helpButton._buttonFont);
+    this->_helpButton._buttonTxt.setString("help");
+    this->_helpButton._buttonTxt.setCharacterSize(scaledFontSize);
+    this->_helpButton._buttonTxt.setFillColor(sf::Color::Black);
+    this->_helpButton._buttonTxt.setPosition(buttonPosX + 7, buttonPosY - 3);
 }
 
 
@@ -89,7 +90,7 @@ void GraphicMenu::loadSceneMenu(void){
 }
 
 void GraphicMenu::drawWindowMenu(void) {
-    if (this->_fade) {
+    if (this->_fadeEffect._fade) {
         this->_graphic->getWindow().draw(this->_nextSprite);
         this->_graphic->getWindow().draw(this->_currentSprite);
     } 
@@ -106,34 +107,34 @@ void GraphicMenu::getReadyNext(void) {
 }
 
 void GraphicMenu::animationSlideMenu(void) {
-    if (!this->_fade) {
+    if (!this->_fadeEffect._fade) {
         this->getReadyNext();
-        this->_fade = true;
-        this->_clock.restart();
+        this->_fadeEffect._fade = true;
+        this->_fadeEffect._clock.restart();
     }
-    if (this->_fade) {
-        float fadeProgress = this->_clock.getElapsedTime().asSeconds() / _fadeDuration;
+    if (this->_fadeEffect._fade) {
+        float fadeProgress = this->_fadeEffect._clock.getElapsedTime().asSeconds() / this->_fadeEffect._fadeDuration;
         if (fadeProgress <= 1.0f)
-            this->_currOpacity = fadeProgress * 255;
+        this->_fadeEffect._currOpacity = fadeProgress * 255;
         else
-            this->_currOpacity = 255;
+            this->_fadeEffect._currOpacity = 255;
 
         sf::Color nextColor = this->_nextSprite.getColor();
-        nextColor.a = static_cast<sf::Uint8>(this->_currOpacity);
+        nextColor.a = static_cast<sf::Uint8>(this->_fadeEffect._currOpacity);
         this->_nextSprite.setColor(nextColor);
 
         sf::Color currentColor = this->_currentSprite.getColor();
-        currentColor.a = static_cast<sf::Uint8>(255 - this->_currOpacity);
+        currentColor.a = static_cast<sf::Uint8>(255 - this->_fadeEffect._currOpacity);
         this->_currentSprite.setColor(currentColor);
 
-        if (this->_currOpacity >= 255) {
-            if (this->_clock.getElapsedTime().asSeconds() > this->_waitDuration) {
+        if (this->_fadeEffect._currOpacity >= 255) {
+            if (this->_fadeEffect._clock.getElapsedTime().asSeconds() > this->_fadeEffect._waitDuration) {
                 this->_currentSpriteIndex = (this->_currentSpriteIndex + 1) % this->_textureMenu.size();
                 this->_currentSprite.setTexture(this->_textureMenu[this->_currentSpriteIndex]);
                 this->_graphic->adaptHeightToWin(this->_textureMenu[this->_currentSpriteIndex], this->_currentSprite);
                 this->_currentSprite.setColor(sf::Color(255, 255, 255, 255));
-                this->_fade = false;
-                this->_clock.restart();
+                this->_fadeEffect._fade = false;
+                this->_fadeEffect._clock.restart();
             }
         }
     }
@@ -146,8 +147,16 @@ void GraphicMenu::setSprite(std::string str, sf::Sprite &sprite, sf::Texture &te
 }
 
 //*********************************GETTERS*********************************
+HelpButton &GraphicMenu::getHelpButton(void){
+    return (this->_helpButton);
+}
+
+FadeEffect &GraphicMenu::getFadeEffect(void){
+    return (this->_fadeEffect);
+}
+
 bool &GraphicMenu::getFade(void){
-    return (this->_stopFade);
+    return (this->_fadeEffect._stopFade);
 }
 
 sf::Sprite &GraphicMenu::getCurrentSprite(void){
@@ -162,32 +171,32 @@ sf::Texture &GraphicMenu::getCurrentTexture(void){
     return (this->_textureMenu[this->_currentSpriteIndex]);
 }
 
-sf::Texture &GraphicMenu::getHelpButtonTexture(void){
+sf::Texture &HelpButton::getHelpButtonTexture(void){
     return (this->_buttonHelpT);
 }
 
-sf::Sprite &GraphicMenu::getHelpButton(void){
+sf::Sprite &HelpButton::getHelpButtonSprite(void){
     return (this->_buttonHelpS);
 }
 
-sf::Text &GraphicMenu::getHelpButtonTxt(void){
+sf::Text &HelpButton::getHelpButtonTxt(void){
     return (this->_buttonTxt);
 }
 
-float GraphicMenu::getRefPosX(void){
+float HelpButton::getRefPosX(void){
     return (this->_refPosX);
 }
-float GraphicMenu::getRefPosY(void){
+float HelpButton::getRefPosY(void){
     return (this->_refPosY);
 }
-float GraphicMenu::getRefWidth(void){
+float HelpButton::getRefWidth(void){
     return (this->_refWidth);
 }
-float GraphicMenu::getRefHeigth(void){
+float HelpButton::getRefHeigth(void){
     return (this->_refHeigth);
 }
 //*********************************SETTERS*********************************
-bool &GraphicMenu::setFade(bool value){
+bool &FadeEffect::setFade(bool value){
     this->_stopFade = value;
     return (this->_stopFade);
 }

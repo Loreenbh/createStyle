@@ -1,23 +1,30 @@
 #include "Graphic.hpp"
 
 //*********************************CONSTRUCTORS*********************************
+SpriteAttributes::SpriteAttributes(): _id(-1), _posStartX(0), _posStartY(0),
+  _posEndX(0), _posEndY(0), _sizeStartX(0), _sizeStartY(0), 
+  _sizeEndX(0), _sizeEndY(0), _angle(0) {};
+
+SpriteAttributes::SpriteAttributes(int i, float psx, float psy, float pex, float pey,
+    float sizeSX, float sizeSY, float sizeEX, float sizeEY, float a)
+: _id(i), _posStartX(psx), _posStartY(psy), _posEndX(pex), 
+    _posEndY(pey), _sizeStartX(sizeSX), _sizeStartY(sizeSY), _sizeEndX(sizeEX),
+    _sizeEndY(sizeEY), _angle(a) {};
+
+
 GraphicHelp::GraphicHelp(Graphic *graphic, GraphicMenu *GraphicMenu) : 
 _graphic(graphic),
 _graphicMenu(GraphicMenu),
 _view(sf::FloatRect(0, 0, this->_graphic->getWidthWin(), this->_graphic->getHeigthWin())),
 _blurIntensity(0.0f),
-_blurDuration(1.5f),
+_blurDuration(1.0f),
 _blurActive(false),
 _blurProgress(0.0f),
 _elapsedTime(0.0f),
 _clock(),
 _currentSprite(),
 _currentSpriteIndex(0),
-_refRule1PosX(250),
-_refRule1PosY(100),
-_refRuleStartX(550),
-_refRuleStartY(500),
-_refRuleEnd(400),
+_refSizeEnd(400),
 _spriteDisplayed(false),
 _endBlur(false),
 _pressEnter(false),
@@ -26,6 +33,7 @@ _finalSprite()
     _pathRulesGame.push_back("../scenes/sceneHelp/rules01.png");
     _pathRulesGame.push_back("../scenes/sceneHelp/rules02.png");
     _pathRulesGame.push_back("../scenes/sceneHelp/rules03.png");
+    _pathRulesGame.push_back("../scenes/sceneHelp/rules04.png");
 
     std::cout << "GraphicHelp created" << std::endl;
 }
@@ -50,55 +58,68 @@ void GraphicHelp::loadSceneHelp(void){
         sf::Texture texture;
         if (!texture.loadFromFile(this->_pathRulesGame[i]))
             throw std::runtime_error("GraphicMenu: The texture has not been loaded");
-        this->_rulesGame.push_back(std::move(texture)); 
+        // this->_rulesGame.push_back(std::move(texture), SpriteAttributes());
+        this->_rulesGame.emplace_back(std::move(texture), SpriteAttributes());
+
     }
     //je set juste la premiere texture
-    this->_currentSprite.setTexture(this->_rulesGame[this->_currentSpriteIndex]);
-    this->_graphic->adaptHeightToWin(this->_rulesGame[this->_currentSpriteIndex], this->_currentSprite);
+    this->_currentSprite.setTexture(this->_rulesGame[this->_currentSpriteIndex].first);
+    this->_graphic->adaptHeightToWin(this->_rulesGame[this->_currentSpriteIndex].first, this->_currentSprite);
 }
 
-sf::Vector2f GraphicHelp::getStartPosRule(float &x, float &y, float scaleX, float scaleY){
-    if (this->_currentSpriteIndex == 0){  
-        x = this->getGraphicMenu()->getRefPosX() * scaleX;
-        y = this->getGraphicMenu()->getRefPosY() * scaleY;
+void GraphicHelp::getStartPosRule(float &x, float &y, float scaleX, float scaleY){
+    if (this->_currentSpriteIndex == 0){
+        x = this->getGraphicMenu()->getHelpButton().getRefPosX() * scaleX;
+        y = this->getGraphicMenu()->getHelpButton().getRefPosY() * scaleY;
     }
     else if (this->_currentSpriteIndex == 1){  
         x = 100 * scaleX;
-        y = 100 * scaleY;
+        y = 300 * scaleY;
+    }
+    else if (this->_currentSpriteIndex == 2){  
+        x = 100 * scaleX;
+        y = 300 * scaleY;
     }
     else if (this->_currentSpriteIndex == 3){  
         x = 100 * scaleX;
         y = 300 * scaleY;
     }
-    return sf::Vector2f(x, y);
 }
 
 
-sf::Vector2f GraphicHelp::getStartSizeRule(float &w, float &h, float scaleX, float scaleY){
+void GraphicHelp::getStartSizeRule(float &w, float &h, float scaleX, float scaleY){
     if (this->_currentSpriteIndex == 0){
-        w = this->getGraphicMenu()->getHelpButton().getGlobalBounds().width * scaleX;
-        h = this->getGraphicMenu()->getHelpButton().getGlobalBounds().height * scaleY;
+        w = this->getGraphicMenu()->getHelpButton()._refWidth * scaleX;
+        h = this->getGraphicMenu()->getHelpButton()._refHeigth * scaleY;
     }
     else{
-        w = this->_refRuleEnd * scaleX * 3;
-        h = this->_refRuleEnd * scaleY * 3;
+        w = this->_refSizeEnd * scaleX * 3;
+        h = this->_refSizeEnd * scaleY * 3;
     }
-    return sf::Vector2f(w, h);
 }
 
-sf::Vector2f GraphicHelp::getEndSizeRule(float &w, float &h, float scaleX, float scaleY){
-    w = this->_refRuleEnd * scaleX;
-    h = this->_refRuleEnd * scaleY;
-    return sf::Vector2f(w, h);
+void GraphicHelp::getEndSizeRule(float &w, float &h, float scaleX, float scaleY){
+    w = this->_refSizeEnd * scaleX;
+    h = this->_refSizeEnd * scaleY;
 }
 
-void GraphicHelp::chooseRotation(int id){
-    if (id == 0)
-        this->_currentSprite.setRotation(10);
-    else if (id == 1)
-        this->_currentSprite.setRotation(-30);
-    else if (id == 2)
-        this->_currentSprite.setRotation(20);
+void GraphicHelp::chooseRotation(SpriteAttributes &curr){ //&
+    if (curr._id == 0){
+        curr._angle = 5;
+        this->_currentSprite.setRotation(curr._angle);
+    }
+    else if (curr._id == 1){
+        curr._angle = -30;
+        this->_currentSprite.setRotation(curr._angle);
+    }
+    else if (curr._id == 2){
+        curr._angle = 20;
+        this->_currentSprite.setRotation(curr._angle);
+    }
+    else if (curr._id == 3){
+        curr._angle = -15;
+        this->_currentSprite.setRotation(curr._angle);
+    }
 }
 
 void GraphicHelp::drawBlurBackground(void){
@@ -119,13 +140,12 @@ void GraphicHelp::drawBlurBackground(void){
     this->_graphic->getWindow().clear();
     this->_finalSprite.setTexture(blurPass.getTexture());
     this->_graphic->getWindow().draw(this->_finalSprite, &this->_blur);
-    // this->_graphic->getWindow().draw(this->_displayedSprites[0]);
-    // this->_graphic->displayWindow();
 }
 
-
-void GraphicHelp::ruleAnimation(int id, float animationProgress) {
+// void GraphicHelp::ruleAnimation(int id, float animationProgress)
+void GraphicHelp::ruleAnimation(int id, SpriteAttributes &curr, float animationProgress) {
     if (id >= 1){
+        curr._id = id;
         float deltaTime = this->_clock.restart().asSeconds();
         const float maxDeltaTime = 0.1f;
         if (deltaTime > maxDeltaTime)
@@ -142,37 +162,59 @@ void GraphicHelp::ruleAnimation(int id, float animationProgress) {
     float scaleY = static_cast<float>(windowSize.y) / this->_graphic->getRefWinHeight();
     
     // 3. Position départ (position du bouton au début)
-    float posStartX, posStartY;
-    sf::Vector2f startPos = this->getStartPosRule(posStartX, posStartY, scaleX, scaleY);
+    // float posStartX, posStartY;
+    // sf::Vector2f startPos = this->getStartPosRule(posStartX, posStartY, scaleX, scaleY);
+
+    this->getStartPosRule(curr._posStartX, curr._posStartY, scaleX, scaleY);
 
     // 4. Taille départ = taille du bouton
-    float sizeStartX, sizeStartY;
-    sf::Vector2f startSize = this->getStartSizeRule(sizeStartX, sizeStartY, scaleX, scaleY);
+    // float sizeStartX, sizeStartY;
+    // sf::Vector2f startSize = this->getStartSizeRule(sizeStartX, sizeStartY, scaleX, scaleY);
 
-    float sizeEndX, sizeEndY;
+    this->getStartSizeRule(curr._sizeStartX, curr._sizeStartY, scaleX, scaleY);
+
+    // float sizeEndX, sizeEndY;
     float posEndX, posEndY;
-    sf::Vector2f endSize, endPos;
-    endSize = this->getEndSizeRule(sizeEndX, sizeEndY, scaleX, scaleY); //endsize.x et endsize.y
-    if (id == 0){ //la position 
-        endPos.x = windowSize.x / 2.0f - endSize.x / 2.0f;
-        endPos.y = windowSize.y / 2.0f - endSize.y / 2.0f;
+    // sf::Vector2f endSize, endPos;
+    // endSize = this->getEndSizeRule(sizeEndX, sizeEndY, scaleX, scaleY);
+    this->getEndSizeRule(curr._sizeEndX, curr._sizeEndY, scaleX, scaleY);
+    if (id == 0){
+        // endPos.x = windowSize.x / 2.0f - endSize.x / 2.0f;
+        // endPos.y = windowSize.y / 2.0f - endSize.y / 2.0f;
+        curr._posEndX = windowSize.x / 2.0f - curr._sizeEndX / 2.0f;
+        curr._posEndY = windowSize.y / 2.0f - curr._sizeEndY / 2.0f;
     }
     else if (id == 1){
-        endPos.x = 250;
-        endPos.y = 80;
+        curr._posEndX = windowSize.x / 2.0f;
+        curr._posEndY = windowSize.y / 2.0f - curr._sizeEndY / 2.0f;
     }
     else if (id == 2){
-        endPos.x = 260;
-        endPos.y = 120;
+        curr._posEndX = windowSize.x / 2.0f;
+        curr._posEndY = windowSize.y / 3.0f;
     }
-    // 7. Interpolation position et taille
-    sf::Vector2f currentPos;
-    currentPos.x = startPos.x + (endPos.x - startPos.x) * animationProgress;
-    currentPos.y = startPos.y + (endPos.y - startPos.y) * animationProgress;
+    else if (id == 3){
+        curr._posEndX = windowSize.x / 2.5f - curr._sizeEndX;
+        curr._posEndY = windowSize.y / 4.5f;
+    }
 
+
+
+
+    
+    // 7. Interpolation position et taille
+    // sf::Vector2f currentPos;
+    // currentPos.x = startPos.x + (endPos.x - startPos.x) * animationProgress;
+    // currentPos.y = startPos.y + (endPos.y - startPos.y) * animationProgress;
+    sf::Vector2f currentPos;
+    currentPos.x = curr._posStartX + (curr._posEndX - curr._posStartX) * animationProgress;
+    currentPos.y = curr._posStartY + (curr._posEndY - curr._posStartY) * animationProgress;
+
+    // sf::Vector2f currentSize;
+    // currentSize.x = startSize.x + (endSize.x - startSize.x) * animationProgress;
+    // currentSize.y = startSize.y + (endSize.y - startSize.y) * animationProgress;
     sf::Vector2f currentSize;
-    currentSize.x = startSize.x + (endSize.x - startSize.x) * animationProgress;
-    currentSize.y = startSize.y + (endSize.y - startSize.y) * animationProgress;
+    currentSize.x = curr._sizeStartX + (curr._sizeEndX - curr._sizeStartX) * animationProgress;
+    currentSize.y = curr._sizeStartY + (curr._sizeEndY - curr._sizeStartY) * animationProgress;
 
     // 8. Appliquer position
     this->_currentSprite.setPosition(currentPos);
@@ -186,7 +228,15 @@ void GraphicHelp::ruleAnimation(int id, float animationProgress) {
     currentScale.y = currentSize.y / texSize.y;
 
     this->_currentSprite.setScale(currentScale);
-    this->chooseRotation(id);
+    // this->chooseRotation(id);
+    this->chooseRotation(curr);
+
+    std::cout << "ID: " << curr._id << "\n"
+          << "Start Position: (" << curr._posStartX << ", " << curr._posStartY << ")\n"
+          << "End Position: (" << curr._posEndX << ", " << curr._posEndY << ")\n"
+          << "Start Size: (" << curr._sizeStartX << ", " << curr._sizeStartY << ")\n"
+          << "End Size: (" << curr._sizeEndX << ", " << curr._sizeEndY << ")\n"
+          << "Angle: " << curr._angle << "°\n";
 }
 
 
@@ -203,7 +253,11 @@ void GraphicHelp::applyBlur(void) {
     this->_blurProgress = std::min(this->_elapsedTime / this->_blurDuration, 1.0f);
     float easedBlur = this->_blurProgress;
     easedBlur = easedBlur * easedBlur * easedBlur * easedBlur; // ease-in
-    this->ruleAnimation(this->_currentSpriteIndex, this->_blurProgress);
+    // this->ruleAnimation(this->_currentSpriteIndex, this->_blurProgress);
+    //initialiser le premier id de la structure
+    this->_rulesGame[0].second._id = 0;
+    this->ruleAnimation(0, this->_rulesGame[0].second, this->_blurProgress);
+
 
     if (this->_elapsedTime >= this->_blurDuration && !this->_spriteDisplayed) {
         this->_displayedSprites.push_back(this->_currentSprite);
@@ -268,7 +322,7 @@ sf::Sprite &GraphicHelp::getCurrentSprite(void){
     return (this->_currentSprite);
 }
 
-std::vector<sf::Texture> &GraphicHelp::getRulesGame(void){
+std::vector<std::pair<sf::Texture, SpriteAttributes>> &GraphicHelp::getRulesGame(void){
     return (this->_rulesGame);
 }
 

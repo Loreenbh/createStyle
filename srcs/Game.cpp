@@ -4,7 +4,7 @@
 Game::Game() : 
     _event(), _state(MENU), _graphics(nullptr), _helpButtonPressed(false){
     try{
-        _graphics = new Graphic(10, 10); //rien a verifier
+        _graphics = new Graphic(300, 300); //rien a verifier
         _graphics->createWindow(); //check fenetre closed
         _graphics->initGraphicMenu(); //creation de scene Menu
         _graphics->initGraphicHelp(); //creation de scene Help
@@ -26,16 +26,17 @@ void Game::selectEventMenu(void){
     this->hoverButtonsMenu(); //met a jour booleen animation
     sf::Vector2i mousePos = sf::Mouse::getPosition(this->getGraphic()->getWindow());
     if (this->getEvent().type == sf::Event::MouseButtonPressed && this->getEvent().mouseButton.button == sf::Mouse::Left){
-        if (this->getGraphic()->getGraphicMenu()->getHelpButton().getGlobalBounds().contains(mousePos.x, mousePos.y)){
+        if (this->getGraphic()->getGraphicMenu()->getHelpButton().getHelpButtonSprite().getGlobalBounds().contains(mousePos.x, mousePos.y)){
             this->getGraphic()->getGraphicMenu()->setSprite("../scenes/sceneMenu/buttonHelpClic.png", 
-                this->getGraphic()->getGraphicMenu()->getHelpButton(), this->getGraphic()->getGraphicMenu()->getHelpButtonTexture());
+                this->getGraphic()->getGraphicMenu()->getHelpButton().getHelpButtonSprite(), 
+                this->getGraphic()->getGraphicMenu()->getHelpButton().getHelpButtonTexture());
             this->_helpButtonPressed = true;
         }
     }
 
     if (this->getEvent().type == sf::Event::MouseButtonReleased && this->getEvent().mouseButton.button == sf::Mouse::Left){
         if (this->_helpButtonPressed &&
-            this->getGraphic()->getGraphicMenu()->getHelpButton().getGlobalBounds().contains(mousePos.x, mousePos.y)) {
+            this->getGraphic()->getGraphicMenu()->getHelpButton().getHelpButtonSprite().getGlobalBounds().contains(mousePos.x, mousePos.y)) {
             this->setStatus(HELP);
             this->getGraphic()->getGraphicHelp()->getBlur() = true;
             this->_helpButtonPressed = false;
@@ -52,15 +53,16 @@ void Game::selectEventHelp(void){
 
 bool Game::hoverButtonsMenu(void){
     sf::Vector2i mousePos = sf::Mouse::getPosition(this->_graphics->getWindow());
-    if (this->getGraphic()->getGraphicMenu()->getHelpButton().getGlobalBounds().contains(mousePos.x, mousePos.y)){
+    if (this->getGraphic()->getGraphicMenu()->getHelpButton().getHelpButtonSprite().getGlobalBounds().contains(mousePos.x, mousePos.y)){
         this->getGraphic()->getGraphicMenu()->setSprite("../scenes/sceneMenu/buttonHelpHover.png", 
-            this->getGraphic()->getGraphicMenu()->getHelpButton(), this->getGraphic()->getGraphicMenu()->getHelpButtonTexture());
+            this->getGraphic()->getGraphicMenu()->getHelpButton().getHelpButtonSprite(), this->getGraphic()->getGraphicMenu()->getHelpButton().getHelpButtonTexture());
         }else{
         this->getGraphic()->getGraphicMenu()->setSprite("../scenes/sceneMenu/buttonHelp.png", 
-            this->getGraphic()->getGraphicMenu()->getHelpButton(), this->getGraphic()->getGraphicMenu()->getHelpButtonTexture());
-        return (this->getGraphic()->getGraphicMenu()->setFade(false));
+            this->getGraphic()->getGraphicMenu()->getHelpButton().getHelpButtonSprite(), 
+                this->getGraphic()->getGraphicMenu()->getHelpButton().getHelpButtonTexture());
+        return (this->getGraphic()->getGraphicMenu()->getFadeEffect().setFade(false));
     }
-    return (this->getGraphic()->getGraphicMenu()->setFade(true));
+    return (this->getGraphic()->getGraphicMenu()->getFadeEffect().setFade(true));
 }
 
 
